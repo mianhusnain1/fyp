@@ -17,12 +17,14 @@ class _SignupState extends State<Signup> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
 
   @override
   void initState() {
     emailcontroller;
     namecontroller;
     passwordcontroller;
+    confirmpassword;
     super.initState();
   }
    @override
@@ -30,6 +32,7 @@ class _SignupState extends State<Signup> {
      emailcontroller;
     namecontroller;
     passwordcontroller;
+    confirmpassword;
     super.dispose();
   }
   Widget build(BuildContext context) {
@@ -58,39 +61,85 @@ class _SignupState extends State<Signup> {
               height: 20,),
              SizedBox(
               child:
-             TextContainer(
-              controller:  namecontroller,
+              TextFormField(
+            
+            controller: namecontroller,
+            obscureText:false,
+            
+            decoration: InputDecoration(
+              
+             
+             prefixIcon: Icon(Icons.person, color: Colors.grey,),
+             hintText: "Enter Your Name",
+             hintStyle: const TextStyle(color: Colors.grey),
+             border: InputBorder.none
+             
+            ),
+          ),
+            //  TextContainer(
+            //   controller:  namecontroller,
 
-              Icons: Icons.verified_user, 
-              Search: "Name",
-              isobscure: false)),
+            //   Icons: Icons.verified_user, 
+            //   Search: "Name",
+            //   isobscure: false)
+              ),
             const SizedBox(
               height: 20,),
              SizedBox(
               child: 
-              TextContainer(
-                controller:  emailcontroller,
-                Icons: Icons.email, 
-                Search: "Email", 
-                isobscure: false),),
+              TextFormField(
+            
+            controller: emailcontroller,
+            obscureText:false,
+            
+            decoration: InputDecoration(
+              
+             
+             prefixIcon: Icon(Icons.email, color: Colors.grey,),
+             hintText: "Enter Your Email",
+             hintStyle: const TextStyle(color: Colors.grey),
+             border: InputBorder.none
+             
+            ),
+          ),),
             const SizedBox(
               height: 20,),
              SizedBox(
-              child: TextContainer(
-                controller:  passwordcontroller,
-                Icons: Icons.lock, 
-                Search: "Password", 
-                isobscure: true),
+              child: TextFormField(
+            
+            controller: namecontroller,
+            obscureText: true,
+            
+            decoration: InputDecoration(
+              
+             
+             prefixIcon: Icon(Icons.lock, color: Colors.grey,),
+             hintText: "Enter Password",
+             hintStyle: const TextStyle(color: Colors.grey),
+             border: InputBorder.none
+             
+            ),
+          ),
             ),
             const SizedBox(
               height: 20,
             ),
              SizedBox(
-              child: TextContainer(
-                controller: passwordcontroller,
-                Icons: Icons.lock, 
-                Search: "Confirm Password", 
-                isobscure: true),
+              child: TextFormField(
+            
+            controller: confirmpassword,
+            obscureText: true,
+            
+            decoration: InputDecoration(
+              
+             
+             prefixIcon: Icon(Icons.lock, color: Colors.grey,),
+             hintText: "Confirm Password",
+             hintStyle: const TextStyle(color: Colors.grey),
+             border: InputBorder.none
+             
+            ),
+          ),
             ),
             const SizedBox(
               height: 30,
@@ -104,7 +153,8 @@ class _SignupState extends State<Signup> {
                await   auth 
                 .createUserWithEmailAndPassword(
                   email: emailcontroller.text,   //here 
-                  password: passwordcontroller.toString(),
+                  password: confirmpassword.toString(),
+                  
                    ) .then((value) {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> Verify()));
                    });

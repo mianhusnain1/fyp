@@ -15,12 +15,20 @@ class Logo extends StatelessWidget {
   }
   
 }
-class TextContainer extends StatelessWidget {
-  const TextContainer({super.key, required this.Icons, required this.Search, required this.isobscure, required this.controller,});
+class TextContainer extends StatefulWidget {
+   TextContainer({super.key, required this.Icons, required this.Search, required this.isobscure, required this.controller,});
 final IconData Icons;
 final TextEditingController controller;
 final String Search;
 final bool isobscure;
+
+  @override
+  State<TextContainer> createState() => _TextContainerState();
+  
+}
+
+class _TextContainerState extends State<TextContainer> {
+  final GlobalKey<FormState> _formstate = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     
@@ -41,19 +49,22 @@ final bool isobscure;
 height: MediaQuery.of(context).size.height * 0.065,
       width: MediaQuery.of(context).size.width - 60,
 
-      child: Center(
-        child: TextField(
-          controller: controller,
-          obscureText: isobscure,
-          
-          decoration: InputDecoration(
+      child: Form(
+        key: _formstate,
+        child: Center(
+          child: TextFormField(
             
-           
-           prefixIcon: Icon(Icons, color: Colors.grey,),
-           hintText: Search,
-           hintStyle: const TextStyle(color: Colors.grey),
-           border: InputBorder.none
-           
+            controller: widget.controller,
+            obscureText: widget.isobscure,
+            
+            decoration: InputDecoration(
+            
+             prefixIcon: Icon(widget.Icons, color: Colors.grey,),
+             hintText: widget.Search,
+             hintStyle: const TextStyle(color: Colors.grey),
+             border: InputBorder.none
+             
+            ),
           ),
         ),
       ),
