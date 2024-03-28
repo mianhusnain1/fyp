@@ -334,6 +334,7 @@ class _SignupState extends State<Signup> {
                             SizedBox(
                               height: 20,
                             ),
+                            SizedBox(height: 10,)
                             
                   ],
                 ),

@@ -51,6 +51,7 @@ class Dialogs {
               left: 25,
               right: 20,
               bottom: 12,
+              
             ),
             child: Text(
               massage,
