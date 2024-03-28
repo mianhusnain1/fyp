@@ -153,3 +153,83 @@ class _VideoState extends State<Video> {
             ));
   }
 }
+
+// class BottomDecoration extends StatelessWidget {
+//   final double height;
+//   const BottomDecoration({
+//     super.key,
+//     required this.height,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(children: [
+//       SizedBox(
+//         width: double.infinity,
+//         child: Stack(
+//           children: [
+//             Positioned(
+//               bottom: -50,
+//               child: Transform.rotate(
+//                 angle: 0.5,
+//                 child: Container(
+//                   height: height,
+//                   width: mq.width * 0.4,
+//                   decoration: const BoxDecoration(
+//                       borderRadius: BorderRadius.only(
+//                           topLeft: Radius.circular(20),
+//                           topRight: Radius.circular(20)),
+//                       color: Color.fromARGB(255, 82, 188, 86)),
+//                 ),
+//               ),
+//             ),
+//             Positioned(
+//               bottom: -50,
+//               right: 0,
+//               child: Transform.rotate(
+//                 angle: -0.5,
+//                 child: Container(
+//                   height: height,
+//                   width: mq.width * 0.4,
+//                   decoration: const BoxDecoration(
+//                       borderRadius: BorderRadius.only(
+//                           topLeft: Radius.circular(20),
+//                           topRight: Radius.circular(20)),
+//                       color: Color.fromARGB(255, 82, 188, 86)),
+//                 ),
+//               ),
+//             ),
+//             Positioned(
+//                 bottom: 0,
+//                 left: mq.width * 0.25,
+//                 child: Container(
+//                   height: height * 0.545,
+//                   width: mq.width * 0.5,
+//                   decoration: BoxDecoration(
+//                     boxShadow: [
+//                       BoxShadow(
+//                           color: const Color.fromARGB(255, 28, 98, 30)
+//                               .withOpacity(0.5),
+//                           blurRadius: 5,
+//                           spreadRadius: 7,
+//                           offset: const Offset(0, 3))
+//                     ],
+//                     borderRadius: const BorderRadius.only(
+//                         topLeft: Radius.circular(20),
+//                         topRight: Radius.circular(20)),
+//                     gradient: const LinearGradient(
+//                       begin: Alignment.topLeft,
+//                       end: Alignment.bottomRight,
+//                       colors: [
+//                         Color.fromARGB(255, 68, 192, 90),
+//                         Color.fromARGB(255, 6, 48, 14)
+//                       ],
+//                     ),
+//                   ),
+//                 ))
+//           ],
+//         ),
+//       ),
+//     ]);
+//   }
+// }

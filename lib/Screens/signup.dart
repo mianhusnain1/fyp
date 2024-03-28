@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:doctor/Screens/Verify.dart';
+import 'package:doctor/Screens/diaolog.dart';
 import 'package:doctor/Screens/validation.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -22,16 +24,10 @@ class _SignupState extends State<Signup> {
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController confirmpassword = TextEditingController();
-
+  bool _passicon = false;
+  bool _confirmpass = false;
   @override
-  // void initState() {
-  //   emailcontroller;
-  //   namecontroller;
-  //   passwordcontroller;
-  //   confirmpassword;
-  //   super.initState();
-  // }
-   @override
+
   void dispose() {
     emailcontroller.dispose();
     namecontroller.dispose();
@@ -67,55 +63,171 @@ class _SignupState extends State<Signup> {
               Form(
                 key: _keystate,
                 child: Column(
-                  children: [
-                    Container(
-                      
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: const [
-                            BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4,
-                offset: Offset(1, 1)
-                            )
-                          ]
-                      ),
+                  children:
+                   [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: TextFormField(
-                        
-                                // onSaved: (value) =>
-                                //     Services.me.name = value ?? "",
-                                // validator: (val) => val != null && val.isNotEmpty
-                                //     ? null
-                                //     : "Required Field",
-                               
-                                decoration: InputDecoration(
-                                  
-                                  label: const Text(
-                                    'Name',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  prefixIcon: Icon(Icons.person),
-                                  hintText: "Enter name",
-                                  prefixIconColor: Colors.blue,
-                                
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30)
-                                      ,
-                                      borderSide: BorderSide(color: Colors.white)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                      borderSide: BorderSide(color: Colors.blue)),
-                                  contentPadding: EdgeInsets.only(
-                                    top: 6,
-                                    bottom: 6,
-                                    left: 10,
-                                  ),
-                                ),
-                              ),
+                        controller: namecontroller,
+                        validator: (value) {
+                                      return value != null && value.isNotEmpty 
+                                      ? null
+                                      : "Required";
+                                    }, 
+                      
+                        decoration: InputDecoration(
+                          
+                          label: Text("Name"),
+                          prefixIcon: Icon(Icons.person),
+                          prefixIconColor: Colors.blue,
+                          hintText: "Enter Name",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.blue),
+                            
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            top: 6,
+                            left: 12
+                          )
+                        ),
+                      ),
                     ),
+                    SizedBox(height: 15,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: TextFormField(
+                        controller: emailcontroller,
+                        validator: (value) {
+                                      return value != null && value.isNotEmpty 
+                                      ? null
+                                      : "Required";
+                                    }, 
+                      
+                        decoration: InputDecoration(
+                          label: Text("Email"),
+                          prefixIcon: Icon(Icons.person),
+                          prefixIconColor: Colors.blue,
+                          hintText: "Enter Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.blue),
+                            
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            top: 6,
+                            left: 12
+                          )
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: TextFormField(
+                        obscureText: !_passicon,
+
+                        controller: passwordcontroller,
+                        validator: (value) {
+                                      return value != null && value.isNotEmpty 
+                                      ? null
+                                      : "Required";
+                                    }, 
+                      
+                        decoration: InputDecoration(
+                          label: Text("Password"),
+                          prefixIcon: Icon(Icons.person),
+                          prefixIconColor: Colors.blue,
+                          suffixIconColor: Colors.black,
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                _passicon = !_passicon;
+                              });
+                            },
+                            icon: _passicon ? Icon(Icons.visibility_off) 
+                            : Icon(Icons.visibility)),
+                          hintText: "Enter Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.blue),
+                            
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            top: 6,
+                            left: 12
+                          )
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: TextFormField(
+                        obscureText: !_confirmpass,
+                        controller: confirmpassword,
+                        validator: (value) {
+                                      if (value != null && value.isNotEmpty) {
+                                        if (passwordcontroller.text == confirmpassword.text) {
+                                          return null;
+
+                                          
+                                        }
+                                        else {
+                                          return "Password did'nt matached";
+                                        }
+                                    
+                                      } else {
+                                        return "Required";
+                                        
+                                      }
+                                    }, 
+                      
+                        decoration: InputDecoration(
+                          label: Text("Confirm Password"),
+                          prefixIcon: Icon(Icons.person),
+                          prefixIconColor: Colors.blue,
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                _confirmpass = !_confirmpass;
+                              });
+                            },
+                            icon: _confirmpass ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                            
+                          
+                          ),
+                          suffixIconColor: Colors.black,
+                          hintText: "Confirm Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide(color: Colors.blue),
+                            
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            top: 6,
+                            left: 12
+                          )
+                        ),
+                      ),
+                    ),
+
                 //     Container(
                 // decoration: BoxDecoration(
                 //           color: Colors.white,
@@ -170,112 +282,7 @@ class _SignupState extends State<Signup> {
                 //             //   Search: "Name",
                 //             //   isobscure: false)
                 // ),
-                            const SizedBox(
-                height: 20,),
-                             Container(
-                decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(const Radius.circular(30)),
-                          boxShadow: const [
-                            BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4,
-                offset: Offset(1, 1)
-                            )
-                          ]
-                        ),
-                        
-                height: MediaQuery.of(context).size.height * 0.065,
-                      width: MediaQuery.of(context).size.width - 60,
-                child: 
-                TextFormField(
-                            
-                            controller: emailcontroller,
-                            obscureText:false,
-                            
-                            decoration: InputDecoration(
-                
-                             
-                             prefixIcon: Icon(Icons.email, color: Colors.grey,),
-                             hintText: "Enter Your Email",
-                             hintStyle: const TextStyle(color: Colors.grey),
-                             border: InputBorder.none
-                             
-                            ),
-                          ),),
-                            const SizedBox(
-                height: 20,),
-                             Container(
-                decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(const Radius.circular(30)),
-                          boxShadow: const [
-                            BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4,
-                offset: Offset(1, 1)
-                            )
-                          ]
-                        ),
-                        
-                height: MediaQuery.of(context).size.height * 0.065,
-                      width: MediaQuery.of(context).size.width - 60,
-                child: TextFormField(
-                            
-                            controller: passwordcontroller,
-                            obscureText: true,
-                            
-                            decoration: InputDecoration(
-                
-                             
-                             prefixIcon: Icon(Icons.lock, color: Colors.grey,),
-                             hintText: "Enter Password",
-                             hintStyle: const TextStyle(color: Colors.grey),
-                             border: InputBorder.none
-                             
-                            ),
-                          ),
-                            ),
-                             SizedBox(
-                height: 20,
-                
-                
-                
-                            ),
-                             Container(
-                decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(const Radius.circular(30)),
-                          boxShadow: const [
-                            BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4,
-                offset: Offset(1, 1)
-                            )
-                          ]
-                        ),
-                        
-                height: MediaQuery.of(context).size.height * 0.065,
-                      width: MediaQuery.of(context).size.width - 60,
-                child: TextFormField(
-                            
-                            controller: confirmpassword,
-                            obscureText: true,
-                            
-                            decoration: InputDecoration(
-                
-                             
-                             prefixIcon: Icon(Icons.lock, color: Colors.grey,),
-                             hintText: "Confirm Password",
-                             hintStyle: const TextStyle(color: Colors.grey),
-                             border: InputBorder.none
-                             
-                            ),
-                          ),
-                            ),
-                            const SizedBox(
-                height: 30,
-                            ),
+                            SizedBox(height: 15,),
                             SizedBox(
                 child: btn(title: "SIGN UP", action: () async{
                   
@@ -283,7 +290,8 @@ class _SignupState extends State<Signup> {
                   if (_keystate.currentState != null && _keystate.currentState!.validate())  {
                     _keystate.currentState!.save();
                   }
-                  try { 
+                  if (passwordcontroller.text == confirmpassword.text) {
+                    try { 
                     final auth = FirebaseAuth.instance;
                  await   auth 
                   .createUserWithEmailAndPassword(
@@ -296,11 +304,37 @@ class _SignupState extends State<Signup> {
                     
                 
                     
-                  } catch (e) {
+                  }on FirebaseAuthException catch (e) {
+                    if ( e.code == "email-already-in-use") { 
+                      Dialogs().errorDialog(context, "Error", "Email Already in Use");
+                      
+                    } else  if (e.code == "weak-password"){
+                      Dialogs().errorDialog(context, "Error", "Weak Password");
+
+
+                      
+                    }
+                    else if (
+                      e.code == "network-request-failed"
+                    ) {
+                      Dialogs().errorDialog(context, "Error", "Network Issue");
+
+                    }
+                    else {
+                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong");
+                    }
+
+
                     print("Error is : $e");
                   }
+                    
+                  }
                 }),
-                            )
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            
                   ],
                 ),
               )

@@ -1,3 +1,4 @@
+import 'package:doctor/Screens/signup.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 
@@ -49,7 +50,9 @@ class _VerifyState extends State<Verify> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
-                  child: btn(title: "Verify", action: (){})
+                  child: btn(title: "Verify", action: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Signup(),));
+                  })
                 )
               ],
             )
