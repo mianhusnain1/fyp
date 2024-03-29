@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   final GlobalKey<FormState> _ketstate1 = GlobalKey<FormState>();
+  bool _isobscure = true;
   @override
   void dispose() {
     emailcontroller.dispose();
@@ -54,6 +55,7 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
                             controller: emailcontroller,
+                            
                             validator: (value) {
                               if (value != null && value.isNotEmpty) {
                                 return null;
@@ -66,8 +68,9 @@ class _LoginState extends State<Login> {
                           
                             decoration: InputDecoration(
                               
-                              label: Text("Email"),
-                              prefixIcon: Icon(Icons.person),
+                              
+                              label: const Text("Email"),
+                              prefixIcon: const Icon(Icons.person),
                               prefixIconColor: Colors.blue,
                               hintText: "Enter Email",
                               border: OutlineInputBorder(
@@ -76,40 +79,23 @@ class _LoginState extends State<Login> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: Colors.blue),
+                                borderSide: const BorderSide(color: Colors.blue),
                                 
                               ),
-                              contentPadding: EdgeInsets.only(
+                              contentPadding: const EdgeInsets.only(
                                 top: 6,
                                 left: 12
                               )
                             ),
                           ),
                   ),),
-                  SizedBox(height: 20,)
-                  // SizedBox(child: TextContainer(
-                  //   controller: emailcontroller,
-                  //   Icons: Icons.email, 
-                  //   Search: "Username", 
-                    
-                  //   isobscure: false),),
-                  //   const SizedBox(
-                  //     height: 20
-                  //   ),
-                  //  SizedBox(
-                  //     child: TextContainer(
-                  //       controller:  passwordcontroller,
-                  //       Icons: Icons.lock,
-                        
-                  //       Search: "Password", 
-                  //       isobscure: true),
-                  //   ),
-                    // const SizedBox(height: 5
-                    // ,),
+                  const SizedBox(height: 20,)
+                 
                     ,SizedBox(child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: TextFormField(
                             controller: passwordcontroller,
+                            obscureText: _isobscure,
                             validator: (value) {
                                           return value != null && value.isNotEmpty 
                                           ? null
@@ -118,9 +104,14 @@ class _LoginState extends State<Login> {
                           
                             decoration: InputDecoration(
                               
-                              label: Text("Password"),
-                              prefixIcon: Icon(Icons.lock),
+                              label: const Text("Password"),
+                              prefixIcon: const Icon(Icons.lock),
                               prefixIconColor: Colors.blue,
+                              suffixIcon: IconButton(onPressed: (){
+                               setState(() {
+                                 _isobscure = !_isobscure;
+                               });
+                              }, icon: Icon(Icons.visibility)),
                               hintText: "Enter Password",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
@@ -128,10 +119,10 @@ class _LoginState extends State<Login> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(color: Colors.blue),
+                                borderSide: const BorderSide(color: Colors.blue),
                                 
                               ),
-                              contentPadding: EdgeInsets.only(
+                              contentPadding: const EdgeInsets.only(
                                 top: 6,
                                 left: 12
                               )
@@ -162,17 +153,28 @@ class _LoginState extends State<Login> {
                     _ketstate1.currentState!.save();
                         try { 
                           showDialog(context: context, builder: (context) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         });
               
                           final auth = FirebaseAuth.instance;
-                          await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
+                          await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => const Home(),)),);
                           Navigator.of(context).pop();
                         } on FirebaseAuthException catch (e) {
                            Navigator.of(context).pop();
                           if (e.code == "invalid-credential") {
                             Dialogs().errorDialog(context, "Error", "Wrong Credentials", () { Navigator.of(context).pop();});
                             
+                          }
+                          else if (e.code == "network-request-failed") {
+                            Dialogs().errorDialog(context, "Nework Error", "Please check your internet connection", () {
+                              Navigator.of(context).pop();
+                             });
+                          }
+                          else if (e.code == "unknown"){
+                            Dialogs().errorDialog(context, 
+                            "Error", "An internal error has occured",
+                             () {
+                            Navigator.of(context).pop(); });
                           }
                           print("Error is $e");
                           
@@ -210,7 +212,7 @@ class _LoginState extends State<Login> {
                              Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Signup(),
+                              builder: (context) => const Signup(),
                             ));
                             }
                             ,
