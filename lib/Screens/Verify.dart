@@ -1,6 +1,9 @@
+import 'package:doctor/Screens/diaolog.dart';
+import 'package:doctor/Screens/login.dart';
 import 'package:doctor/Screens/signup.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -50,8 +53,23 @@ class _VerifyState extends State<Verify> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
-                  child: btn(title: "Verify", action: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Signup(),));
+                  child: btn(title: "Verify", action: () async{
+                    final user = FirebaseAuth.instance.currentUser;
+
+                    try { await user!.sendEmailVerification().then((value) => (){
+                      Dialogs().errorDialog(context, "Process", "We have sent you a verification email.", (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Login()));});
+                       
+                    });
+                      
+                    } catch (e) { 
+                      print(e);
+                      Dialogs().errorDialog(context, "Error", "Something Went Wrong", (){Navigator.of(context).pop;});
+                      
+                    }
+
+
+
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Signup(),));
                   })
                 )
               ],

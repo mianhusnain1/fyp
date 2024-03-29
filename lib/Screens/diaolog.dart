@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+
 class Dialogs {
+
+
+
   static void showMassage(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -40,7 +45,7 @@ class Dialogs {
     );
   }
 
-  Future<void> errorDialog(BuildContext context, String title, String massage) {
+  Future<void> errorDialog(BuildContext context, String title, String massage, VoidCallback btn1) {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
@@ -61,9 +66,7 @@ class Dialogs {
             ),
           ),
           TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: btn1,
             child: const Text('Ok'),
           )
         ],
@@ -71,3 +74,8 @@ class Dialogs {
     );
   }
 }
+
+
+class Fucntion {
+
+} //must capital letter

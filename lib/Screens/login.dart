@@ -1,3 +1,4 @@
+import 'package:doctor/Screens/diaolog.dart';
 import 'package:doctor/Screens/forget.dart';
 import 'package:doctor/Screens/home.dart';
 import 'package:doctor/Screens/signup.dart';
@@ -76,9 +77,10 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 10,),
                   SizedBox(
                     child: btn(title: "LOGIN", action: () async{ 
-                      try {
-                        final auth = FirebaseAuth.instance;
-                        await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
+                      try {Dialogs().errorDialog(context, "Error", "Hello", () { Navigator.of(context).pop();});
+
+                        // final auth = FirebaseAuth.instance;
+                        // await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
                       } catch (e) {
                         print("Error is $e");
                         

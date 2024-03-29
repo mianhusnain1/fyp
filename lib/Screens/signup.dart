@@ -306,10 +306,12 @@ class _SignupState extends State<Signup> {
                     
                   }on FirebaseAuthException catch (e) {
                     if ( e.code == "email-already-in-use") { 
-                      Dialogs().errorDialog(context, "Error", "Email Already in Use");
+                      Dialogs().errorDialog(context, "Error", "Email Already in Use", () {Navigator.of(context).pop; });
+                      // Dialogs().errorDialog(context, "Error", "Email Already in Use", button: (){});
                       
                     } else  if (e.code == "weak-password"){
-                      Dialogs().errorDialog(context, "Error", "Weak Password");
+                      Dialogs().errorDialog(context, "Error", "Weak Password", () { Navigator.of(context).pop;});
+                      // Dialogs().errorDialog(context, "Error", "Weak Password");
 
 
                       
@@ -317,11 +319,11 @@ class _SignupState extends State<Signup> {
                     else if (
                       e.code == "network-request-failed"
                     ) {
-                      Dialogs().errorDialog(context, "Error", "Network Issue");
+                      Dialogs().errorDialog(context, "Error", "Network Issue", (){ Navigator.of(context).pop;});
 
                     }
                     else {
-                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong");
+                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong", (){Navigator.of(context).pop;}, );
                     }
 
 
