@@ -228,60 +228,7 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
 
-                //     Container(
-                // decoration: BoxDecoration(
-                //           color: Colors.white,
-                //           borderRadius: BorderRadius.all(const Radius.circular(30)),
-                //           boxShadow: const [
-                //             BoxShadow(
-                // color: Colors.grey,
-                // blurRadius: 4,
-                // offset: Offset(1, 1)
-                //             )
-                //           ]
-                //         ),
-                //         height: MediaQuery.of(context).size.height * 0.065,
-                //         width: MediaQuery.of(context).size.width - 60,
-                // child:
-                // TextFormField(
-
-                //             onSaved: (newValue) {
-                              
-                //             },
-                //             controller: namecontroller,
-                //             obscureText:false,
-                //             decoration: InputDecoration(
-                             
-                //              prefixIcon: Icon(Icons.person, color: Colors.grey,),
-                //              hintText: "Enter Your Name",
-                //              contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                //              hintStyle: const TextStyle(color: Colors.grey),
-                //              border: InputBorder.none
-                             
-                //             ),
-                //             validator: (value) {
-                //               if (value == null || value == "" ) {
-                //                 return "Required";
-
-                                
-                //               }
-                //               else if(ValidationHub.isValidFullName(value)) {
-                //                 return null;
-
-                //               }
-                //               else {
-                //                 return "Only Alphabet Allowed";
-                //               }
-                              
-                //             },
-                //           ),
-                //             //  TextContainer(
-                //             //   controller:  namecontroller,
                 
-                //             //   Icons: Icons.verified_user, 
-                //             //   Search: "Name",
-                //             //   isobscure: false)
-                // ),
                             SizedBox(height: 15,),
                             SizedBox(
                 child: btn(title: "SIGN UP", action: () async{
@@ -306,11 +253,11 @@ class _SignupState extends State<Signup> {
                     
                   }on FirebaseAuthException catch (e) {
                     if ( e.code == "email-already-in-use") { 
-                      Dialogs().errorDialog(context, "Error", "Email Already in Use", () {Navigator.of(context).pop; });
+                      Dialogs().errorDialog(context, "Error", "Email Already in Use", () {Navigator.of(context).pop(); });
                       // Dialogs().errorDialog(context, "Error", "Email Already in Use", button: (){});
                       
                     } else  if (e.code == "weak-password"){
-                      Dialogs().errorDialog(context, "Error", "Weak Password", () { Navigator.of(context).pop;});
+                      Dialogs().errorDialog(context, "Error", "Weak Password", () { Navigator.of(context).pop();});
                       // Dialogs().errorDialog(context, "Error", "Weak Password");
 
 
@@ -319,11 +266,11 @@ class _SignupState extends State<Signup> {
                     else if (
                       e.code == "network-request-failed"
                     ) {
-                      Dialogs().errorDialog(context, "Error", "Network Issue", (){ Navigator.of(context).pop;});
+                      Dialogs().errorDialog(context, "Error", "Network Issue", (){ Navigator.of(context).pop();});
 
                     }
                     else {
-                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong", (){Navigator.of(context).pop;}, );
+                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong", (){Navigator.of(context).pop();}, );
                     }
 
 

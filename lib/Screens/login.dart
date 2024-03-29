@@ -40,25 +40,94 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 40,),
-                SizedBox(child: TextContainer(
-                  controller: emailcontroller,
-                  Icons: Icons.email, 
-                  Search: "Username", 
+                SizedBox(child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: TextFormField(
+                          controller: emailcontroller,
+                          validator: (value) {
+                            if (value != null && value.isNotEmpty) {
+                              return null;
+                              
+                            }
+                            else{
+                              return "Required";
+                            }
+                          },
+                        
+                          decoration: InputDecoration(
+                            
+                            label: Text("Name"),
+                            prefixIcon: Icon(Icons.person),
+                            prefixIconColor: Colors.blue,
+                            hintText: "Enter Name",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide(color: Colors.blue),
+                              
+                            ),
+                            contentPadding: EdgeInsets.only(
+                              top: 6,
+                              left: 12
+                            )
+                          ),
+                        ),
+                ),),
+                SizedBox(height: 20,)
+                // SizedBox(child: TextContainer(
+                //   controller: emailcontroller,
+                //   Icons: Icons.email, 
+                //   Search: "Username", 
                   
-                  isobscure: false),),
-                  const SizedBox(
-                    height: 20
-                  ),
-                 SizedBox(
-                    child: TextContainer(
-                      controller:  passwordcontroller,
-                      Icons: Icons.lock,
+                //   isobscure: false),),
+                //   const SizedBox(
+                //     height: 20
+                //   ),
+                //  SizedBox(
+                //     child: TextContainer(
+                //       controller:  passwordcontroller,
+                //       Icons: Icons.lock,
                       
-                      Search: "Password", 
-                      isobscure: true),
-                  ),
+                //       Search: "Password", 
+                //       isobscure: true),
+                //   ),
                   // const SizedBox(height: 5
                   // ,),
+                  ,SizedBox(child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextFormField(
+                          controller: passwordcontroller,
+                          validator: (value) {
+                                        return value != null && value.isNotEmpty 
+                                        ? null
+                                        : "Required";
+                                      }, 
+                        
+                          decoration: InputDecoration(
+                            
+                            label: Text("Name"),
+                            prefixIcon: Icon(Icons.person),
+                            prefixIconColor: Colors.blue,
+                            hintText: "Enter Name",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: BorderSide(color: Colors.blue),
+                              
+                            ),
+                            contentPadding: EdgeInsets.only(
+                              top: 6,
+                              left: 12
+                            )
+                          ),
+                        ),
+                  ),),
                   InkWell(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> const Forget()));
@@ -77,10 +146,10 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 10,),
                   SizedBox(
                     child: btn(title: "LOGIN", action: () async{ 
-                      try {Dialogs().errorDialog(context, "Error", "Hello", () { Navigator.of(context).pop();});
+                      try {
 
-                        // final auth = FirebaseAuth.instance;
-                        // await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
+                        final auth = FirebaseAuth.instance;
+                        await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
                       } catch (e) {
                         print("Error is $e");
                         
@@ -88,6 +157,7 @@ class _LoginState extends State<Login> {
                     }),
                   ),
                   const SizedBox(height: 20,),
+             
                   const SizedBox(
                     
                     child: Text("Or Login With", style: TextStyle(

@@ -63,7 +63,7 @@ class _VerifyState extends State<Verify> {
                       
                     } catch (e) { 
                       print(e);
-                      Dialogs().errorDialog(context, "Error", "Something Went Wrong", (){Navigator.of(context).pop;});
+                      Dialogs().errorDialog(context, "Error", "Something Went Wrong", (){Navigator.of(context).pop();});
                       
                     }
 
