@@ -5,6 +5,7 @@ import 'package:doctor/Screens/signup.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -17,7 +18,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
-  
+  final GlobalKey<FormState> _ketstate1 = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context).size;
@@ -29,173 +37,189 @@ class _LoginState extends State<Login> {
         child: ListView(
           
           children:  [
-            Column(
-              children: [
-                const MainTop(),
-            const Logo(),
-            const SizedBox(
-                  child: Text(
-                    "SIGN IN",
-                    style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            Form(
+              key: _ketstate1,
+              child: Column(
+                children: [
+                  const MainTop(),
+              const Logo(),
+              const SizedBox(
+                    child: Text(
+                      "SIGN IN",
+                      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 40,),
-                SizedBox(child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: TextFormField(
-                          controller: emailcontroller,
-                          validator: (value) {
-                            if (value != null && value.isNotEmpty) {
-                              return null;
-                              
-                            }
-                            else{
-                              return "Required";
-                            }
-                          },
-                        
-                          decoration: InputDecoration(
-                            
-                            label: Text("Name"),
-                            prefixIcon: Icon(Icons.person),
-                            prefixIconColor: Colors.blue,
-                            hintText: "Enter Name",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.blue),
-                              
-                            ),
-                            contentPadding: EdgeInsets.only(
-                              top: 6,
-                              left: 12
-                            )
-                          ),
-                        ),
-                ),),
-                SizedBox(height: 20,)
-                // SizedBox(child: TextContainer(
-                //   controller: emailcontroller,
-                //   Icons: Icons.email, 
-                //   Search: "Username", 
-                  
-                //   isobscure: false),),
-                //   const SizedBox(
-                //     height: 20
-                //   ),
-                //  SizedBox(
-                //     child: TextContainer(
-                //       controller:  passwordcontroller,
-                //       Icons: Icons.lock,
-                      
-                //       Search: "Password", 
-                //       isobscure: true),
-                //   ),
-                  // const SizedBox(height: 5
-                  // ,),
-                  ,SizedBox(child: Padding(
+                  const SizedBox(height: 40,),
+                  SizedBox(child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
-                          controller: passwordcontroller,
-                          validator: (value) {
-                                        return value != null && value.isNotEmpty 
-                                        ? null
-                                        : "Required";
-                                      }, 
-                        
-                          decoration: InputDecoration(
-                            
-                            label: Text("Name"),
-                            prefixIcon: Icon(Icons.person),
-                            prefixIconColor: Colors.blue,
-                            hintText: "Enter Name",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide(color: Colors.blue),
+                            controller: emailcontroller,
+                            validator: (value) {
+                              if (value != null && value.isNotEmpty) {
+                                return null;
+                                
+                              }
+                              else{
+                                return "Required";
+                              }
+                            },
+                          
+                            decoration: InputDecoration(
                               
+                              label: Text("Email"),
+                              prefixIcon: Icon(Icons.person),
+                              prefixIconColor: Colors.blue,
+                              hintText: "Enter Email",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.blue),
+                                
+                              ),
+                              contentPadding: EdgeInsets.only(
+                                top: 6,
+                                left: 12
+                              )
                             ),
-                            contentPadding: EdgeInsets.only(
-                              top: 6,
-                              left: 12
-                            )
                           ),
-                        ),
                   ),),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Forget()));
-                    },
-                    // ignore: prefer_const_constructors
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: const SizedBox(
-                        child: Text("Forget Password?", style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500
-                        ),),
+                  SizedBox(height: 20,)
+                  // SizedBox(child: TextContainer(
+                  //   controller: emailcontroller,
+                  //   Icons: Icons.email, 
+                  //   Search: "Username", 
+                    
+                  //   isobscure: false),),
+                  //   const SizedBox(
+                  //     height: 20
+                  //   ),
+                  //  SizedBox(
+                  //     child: TextContainer(
+                  //       controller:  passwordcontroller,
+                  //       Icons: Icons.lock,
+                        
+                  //       Search: "Password", 
+                  //       isobscure: true),
+                  //   ),
+                    // const SizedBox(height: 5
+                    // ,),
+                    ,SizedBox(child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: TextFormField(
+                            controller: passwordcontroller,
+                            validator: (value) {
+                                          return value != null && value.isNotEmpty 
+                                          ? null
+                                          : "Required";
+                                        }, 
+                          
+                            decoration: InputDecoration(
+                              
+                              label: Text("Password"),
+                              prefixIcon: Icon(Icons.lock),
+                              prefixIconColor: Colors.blue,
+                              hintText: "Enter Password",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.blue),
+                                
+                              ),
+                              contentPadding: EdgeInsets.only(
+                                top: 6,
+                                left: 12
+                              )
+                            ),
+                          ),
+                    ),),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Forget()));
+                      },
+                      // ignore: prefer_const_constructors
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: const SizedBox(
+                          child: Text("Forget Password?", style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500
+                          ),),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10,),
-                  SizedBox(
-                    child: btn(title: "LOGIN", action: () async{ 
-                      try {
-
-                        final auth = FirebaseAuth.instance;
-                        await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
-                      } catch (e) {
-                        print("Error is $e");
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                      child: btn(title: "LOGIN", action: () 
+                      async{ 
                         
-                      }
-                    }),
-                  ),
-                  const SizedBox(height: 20,),
-             
-                  const SizedBox(
-                    
-                    child: Text("Or Login With", style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize:15
-                    ),),
-                  ),
-                  const SizedBox(height: 10,),
-                  const SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoginButton( img: "images/facebook.png", ),
-                        
-                        LoginButton(img: "images/Google.png"),
-                       
-                      ],
-                    ),
-                  ),
-                   SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don't have an Account?"),
-                        InkWell(
-                          onTap: (){
-                           Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Signup(),
-                          ));
+                         if (_ketstate1.currentState != null && _ketstate1.currentState!.validate())  {
+                    _ketstate1.currentState!.save();
+                        try { 
+                          showDialog(context: context, builder: (context) {
+                          return Center(child: CircularProgressIndicator());
+                        });
+              
+                          final auth = FirebaseAuth.instance;
+                          await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(),)),);
+                          Navigator.of(context).pop();
+                        } on FirebaseAuthException catch (e) {
+                           Navigator.of(context).pop();
+                          if (e.code == "invalid-credential") {
+                            Dialogs().errorDialog(context, "Error", "Wrong Credentials", () { Navigator.of(context).pop();});
+                            
                           }
-                          ,
-                          child: const Text(" SIGN UP", style: TextStyle(color: myColor, fontWeight: FontWeight.bold),))
-                      ],
+                          print("Error is $e");
+                          
+                        }
+                      }}),
                     ),
-                  )
-              ],
+                    const SizedBox(height: 20,),
+               
+                    const SizedBox(
+                      
+                      child: Text("Or Login With", style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:15
+                      ),),
+                    ),
+                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          LoginButton( img: "images/facebook.png", ),
+                          
+                          LoginButton(img: "images/Google.png"),
+                         
+                        ],
+                      ),
+                    ),
+                     SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don't have an Account?"),
+                          InkWell(
+                            onTap: (){
+                             Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Signup(),
+                            ));
+                            }
+                            ,
+                            child: const Text(" SIGN UP", style: TextStyle(color: myColor, fontWeight: FontWeight.bold),))
+                        ],
+                      ),
+                    )
+                ],
+              ),
             )
           ],
         ),
