@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class Dialogs {
 
-
+static void showMessage1 (BuildContext context){
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("")));
+}
 
   static void showMassage(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
