@@ -1,3 +1,4 @@
+import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
 
@@ -52,6 +53,7 @@ static void showMessage1 (BuildContext context){
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(title),
+        backgroundColor: myColor,
         children: [
           Padding(
             padding: const EdgeInsets.only(
