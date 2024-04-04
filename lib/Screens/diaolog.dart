@@ -34,6 +34,7 @@ static void showMessage1 (BuildContext context){
                 right: 20,
                 bottom: 12,
               ),
+              
               child: Text(
                 msg,
                 style: const TextStyle(
@@ -48,18 +49,20 @@ static void showMessage1 (BuildContext context){
     );
   }
 
-  Future<void> errorDialog(BuildContext context, String title, String massage, VoidCallback btn1) {
+  Future<void> errorDialog(BuildContext context, String title, String massage, VoidCallback btn1 ) {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(title),
-        backgroundColor: myColor,
+        // backgroundColor: myColor,
+        
         children: [
           Padding(
             padding: const EdgeInsets.only(
               left: 25,
               right: 20,
               bottom: 12,
+              
               
             ),
             child: Text(
@@ -68,11 +71,33 @@ static void showMessage1 (BuildContext context){
                 fontSize: 16,
               ),
             ),
+            
           ),
-          TextButton(
-            onPressed: btn1,
-            child: const Text('Ok'),
-          )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                child: InkWell(
+                  hoverColor: Colors.blue,
+                  focusColor: Colors.red,
+                  onTap: btn1,
+                  child: Text("Close")),
+
+              ),
+              Container(
+                child: InkWell(
+                  onTap: () {
+                    
+                  },
+                  child: Text("Got It")),
+              )
+            ],
+          ),
+          
+          // TextButton(
+          //   onPressed: btn1,
+          //   child: const Text('Ok'),
+          // )
         ],
       ),
     );
