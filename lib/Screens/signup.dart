@@ -319,16 +319,52 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  String usertype = "";
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        child: Column(
-          children: [MainTop(),
-          Logo()],
+        height: double.infinity,
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          children:  [  
+            Column(
+            children: [ 
+            const MainTop(),
+            const Logo(),
+            const SizedBox(child: Text("SIGN UP", style: 
+                      TextStyle(
+                        fontSize: 35, 
+                        fontWeight: FontWeight.bold),),),
+            SizedBox(
+              child: _Bottom(),
+              
+            )
+            ],
+                        
+            
+          ), ]
         ),
 
       ),
     );
   }
+
+}
+Widget _Bottom(){
+  return const SizedBox(
+    height: 20,
+    child: Card(
+      color: Colors.amber,
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+         topRight: Radius.circular(20)
+        ),
+      ),
+      
+    ),
+  );
 }
