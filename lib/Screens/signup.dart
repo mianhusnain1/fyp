@@ -312,14 +312,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Signup extends StatefulWidget {
-  const Signup({super.key});
-
+  
+  const Signup({super.key });
+  
   @override
   State<Signup> createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
-  String usertype = "";
+  String userType = "";
+  void selectUserType(String type) {
+    setState(() {
+      userType = type;
+    });
+    print(userType);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -364,7 +371,13 @@ Widget _Bottom(){
          topRight: Radius.circular(20)
         ),
       ),
-      
+      // child: userType == 'patient' ? _patient() : _doctor(),
     ),
   );
 }
+Widget _doctor(){
+  return Column();
+}
+ Widget _patient(){
+  return Column();
+ }
