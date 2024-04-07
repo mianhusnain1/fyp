@@ -59,6 +59,22 @@ class Navbar extends StatelessWidget {
               fontWeight: FontWeight.bold
             ), ),
             trailing: const Icon(Icons.arrow_forward),
+          ),
+           ListTile(
+          onTap: () {},
+          shape: Border(
+          
+          ),
+          focusColor: myColor1,
+          tileColor: Colors.white,
+            leading: const Icon(Icons.person, ),
+            iconColor: myColor1,
+            title: const Text("Instant Doctor", 
+            style: TextStyle(
+              color: myColor1,
+              fontWeight: FontWeight.bold
+            ), ),
+            trailing: const Icon(Icons.arrow_forward),
           )
         ],
         
