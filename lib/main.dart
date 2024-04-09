@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         loginroute: (context) => const Login(),
         homeroute: (context) => const Home(),
       },
-      home: const Login(),
+      home: const Splash(),
     );
   }
 }
