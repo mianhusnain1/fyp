@@ -15,10 +15,10 @@ class Navbar extends StatelessWidget {
             accountName: const Text(""),
             accountEmail: const Text(""),
             currentAccountPicture: CircleAvatar(
-              radius: 20,
+              radius: 80,
               child: ClipOval(
                 child: Image.asset(
-                  "images/Profile.jpg",
+                  "assets/imgs/Profile.jpg",
                   fit: BoxFit.cover,
                 ),
               ),
