@@ -308,28 +308,38 @@
 //   return Form(child: Text(":"),);
 // }
 import 'package:doctor/Screens/widgets.dart';
+import 'package:doctor/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Signup extends StatefulWidget {
   
-  const Signup({super.key });
+  
+  
+   Signup({super.key });
   
   @override
   State<Signup> createState() => _SignupState();
 }
-
+late Size mq;
 class _SignupState extends State<Signup> {
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
   String userType = "";
-  void selectUserType(String type) {
+ 
+  // bool obscure = true;
+  bool confirmpass = true;
+  void selectUserType ( String user){
     setState(() {
-      userType = type;
+      userType = user;
     });
-    print(userType);
   }
 
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
     return  Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -359,25 +369,260 @@ class _SignupState extends State<Signup> {
     );
   }
 
-}
+
 Widget _Bottom(){
-  return const SizedBox(
-    height: 20,
+  
+  return  SizedBox(
+   
     child: Card(
-      color: Colors.amber,
-      shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.only(
+      color: Colors.white,
+      
+      
+        shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
          topRight: Radius.circular(20)
         ),
+        
       ),
-      // child: userType == 'patient' ? _patient() : _doctor(),
+      child: userType == 'patient' ? _doctor() : _patient(),
     ),
   );
 }
+
 Widget _doctor(){
-  return Column();
+  return Column(
+    children: [Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top:8.0),
+          child: InkWell(
+            onTap: ()=> selectUserType('patient'),
+            child: Container(
+              height: 40,
+              width: 100,
+              // ignore: sort_child_properties_last
+              child:  Center(
+                child: Text("Patient",
+                style: TextStyle(
+                  color: userType == 'patient' ? Colors.black : Colors.black,
+                  fontWeight: FontWeight.w600
+                ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: userType == 'patient' ? myColor : Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: myColor1
+                )
+                
+              ),
+              
+            ),
+          ),
+          
+        ),
+        const SizedBox(width: 20,),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0),
+          child: InkWell(
+            onTap: ()=> selectUserType('doctor'),
+            child: Container(
+            height: 40,
+            width: 100,
+            decoration: BoxDecoration(
+                color: userType == 'doctor' ? myColor :Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: myColor1
+                )
+                
+              ),
+            child:  Center(child: Text("Doctor",
+            style: TextStyle(
+              color: userType == 'doctor' ? Colors.black : Colors.black,
+              fontWeight: FontWeight.w600
+            ),)),
+            ),
+          ),
+        ),
+        
+      ],
+    ),
+    SizedBox(
+          height: MediaQuery.of(context).size.height * .01,
+        ),
+        const Text(
+          "Welcome, Sign Up",
+          style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue,
+              letterSpacing: .4),
+        ),
+        SizedBox(
+          height:  mq.height * .06,
+          
+          child: _inputField( namecontroller, isName:  true),
+        ),
+        const SizedBox(height: 15,),
+        SizedBox(
+          height:  mq.height * .06,
+          child: _inputField(emailcontroller, isName: false),
+
+        ),
+        const SizedBox(height: 15,),
+        SizedBox(
+          height: mq.height *0.06, child: _inputField(passwordcontroller,
+        isPassword:  true),)
+        ],
+    
+  );
 }
  Widget _patient(){
-  return Column();
+  return Column(
+    children: [Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top:8.0),
+          child: InkWell(
+            onTap: ()=> selectUserType('patient'),
+            child: Container(
+              height: 40,
+              width: 100,
+              // ignore: sort_child_properties_last
+              child:  Center(
+                child: Text("Patient",
+                style: TextStyle(
+                  color: userType == 'patient' ? Colors.black : Colors.black,
+                  fontWeight: FontWeight.w600
+                ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: userType == 'patient' ? myColor : Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: myColor1
+                )
+                
+              ),
+              
+            ),
+          ),
+          
+        ),
+        const SizedBox(width: 20,),
+        Padding(
+          padding: const EdgeInsets.only(top:8.0),
+          child: InkWell(
+            onTap: ()=> selectUserType('doctor'),
+            child: Container(
+            height: 40,
+            width: 100,
+            decoration: BoxDecoration(
+                color: userType == 'doctor' ? myColor :Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: myColor1
+                )
+                
+              ),
+            child:  Center(child: Text("Doctor",
+            style: TextStyle(
+              color: userType == 'doctor' ? Colors.black : Colors.black,
+              fontWeight: FontWeight.w600
+            ),)),
+            ),
+          ),
+        ),
+        
+      ],
+    ),
+    SizedBox(
+          height: MediaQuery.of(context).size.height * .01,
+        ),
+        const Text(
+          "Welcome, Sign Up",
+          style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue,
+              letterSpacing: .4),
+        ),
+        SizedBox(
+          height:  mq.height * .06,
+          
+          child: _inputField( namecontroller, isName:  true),
+        ),
+        const SizedBox(height: 15,),
+        SizedBox(
+          height:  mq.height * .06,
+          child: _inputField(emailcontroller, isName: false),
+
+        ),
+        const SizedBox(height: 15,),
+        SizedBox(
+          height: mq.height *0.06, child: _inputField(passwordcontroller,
+        isPassword:  true),),
+        SizedBox(
+          child: Text("data"),
+        )
+        ],
+    
+  );
+ }
+
+Widget _inputField ( TextEditingController controller, 
+{isPassword = false, isName = false } ){ //(isPassword and isName) they are optional parameters should are in curley brakets it means they are optional 
+  return TextFormField(
+    
+    controller: controller,
+    obscureText: confirmpass,
+    decoration: InputDecoration(
+      label: Text(isPassword 
+      ? "Password"
+      : isName 
+        ?"Name" 
+        :"Email",
+        style: const TextStyle(
+          color:
+         Colors.grey, 
+         fontSize:  12),  ),
+         prefixIcon: isPassword 
+         ? const Icon(Icons.lock)
+         : isName 
+           ? const Icon(Icons.person)
+           : const Icon(Icons.email),
+           hintText: isPassword
+          ? "Enter Password"
+          : isName 
+            ? "Enter Name"
+            : "Enter Email",
+        hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
+        prefixIconColor: myColor,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+          borderSide: BorderSide(color: Colors.blue),
+    ),
+    suffixIcon: isPassword 
+    ? IconButton(onPressed: (){
+      setState(() {
+        confirmpass = !confirmpass;
+      });
+    }, icon: (
+      confirmpass 
+         ? Icon(Icons.visibility)
+         : Icon(Icons.visibility_off)))
+    :null
+    
+  )
+  );
+ }
  }
