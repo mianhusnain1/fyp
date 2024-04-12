@@ -327,6 +327,7 @@ class _SignupState extends State<Signup> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
   String userType = "";
  
   // bool obscure = true;
@@ -354,6 +355,7 @@ class _SignupState extends State<Signup> {
             const SizedBox(child: Text("SIGN UP", style: 
                       TextStyle(
                         fontSize: 35, 
+                        color: myColor1,
                         fontWeight: FontWeight.bold),),),
             SizedBox(
               child: _Bottom(),
@@ -385,7 +387,7 @@ Widget _Bottom(){
         ),
         
       ),
-      child: userType == 'patient' ? _doctor() : _patient(),
+      child: userType == 'patient' ? _patient() : _doctor(),
     ),
   );
 }
@@ -455,28 +457,39 @@ Widget _doctor(){
           height: MediaQuery.of(context).size.height * .01,
         ),
         const Text(
-          "Welcome, Sign Up",
+          "Welcome",
           style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w600,
-              color: Colors.blue,
+              color: myColor1,
               letterSpacing: .4),
         ),
         SizedBox(
           height:  mq.height * .06,
-          
+           width: mq.width - 40,
           child: _inputField( namecontroller, isName:  true),
         ),
         const SizedBox(height: 15,),
         SizedBox(
           height:  mq.height * .06,
+          width: mq.width - 40,
           child: _inputField(emailcontroller, isName: false),
 
         ),
         const SizedBox(height: 15,),
         SizedBox(
-          height: mq.height *0.06, child: _inputField(passwordcontroller,
-        isPassword:  true),)
+          height: mq.height *0.06,
+           width: mq.width - 40,
+            child: _inputField(passwordcontroller,
+        isPassword:  true),),
+        SizedBox(
+          height: 15,
+        ),
+        SizedBox(
+          height: mq.height *0.06,
+          width:  mq.width - 40,
+          child: _inputField(confirmpassword, isPassword:  true),
+        ),
         ],
     
   );
@@ -546,11 +559,11 @@ Widget _doctor(){
           height: MediaQuery.of(context).size.height * .01,
         ),
         const Text(
-          "Welcome, Sign Up",
+          "Welcome",
           style: TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.w600,
-              color: Colors.blue,
+              color: myColor1,
               letterSpacing: .4),
         ),
         SizedBox(
@@ -580,8 +593,11 @@ Widget _inputField ( TextEditingController controller,
 {isPassword = false, isName = false } ){ //(isPassword and isName) they are optional parameters should are in curley brakets it means they are optional 
   return TextFormField(
     
+    
     controller: controller,
-    obscureText: confirmpass,
+    obscureText: isPassword 
+    ? confirmpass
+    : false,
     decoration: InputDecoration(
       label: Text(isPassword 
       ? "Password"
@@ -604,10 +620,10 @@ Widget _inputField ( TextEditingController controller,
             : "Enter Email",
         hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
         prefixIconColor: myColor,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(20),
+            Radius.circular(30),
           ),
           borderSide: BorderSide(color: Colors.blue),
     ),
