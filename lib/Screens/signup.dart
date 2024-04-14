@@ -307,8 +307,10 @@
 // Widget _doctorsignup(){
 //   return Form(child: Text(":"),);
 // }
+import 'package:doctor/Screens/home.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -490,6 +492,23 @@ Widget _doctor(){
           width:  mq.width - 40,
           child: _inputField(confirmpassword, isPassword:  true),
         ),
+        SizedBox(
+          child: btn(title: "SIGN UP", action: () async{
+            try {
+              final auth = FirebaseAuth.instance;
+              await auth 
+              .createUserWithEmailAndPassword(
+                email: emailcontroller.text.toString(), 
+                password: passwordcontroller.text.toString()).then((value) => 
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Home())));
+
+              
+            } catch (e) {
+              print("Error is $e");
+              
+            }
+          }),
+        )
         ],
     
   );
