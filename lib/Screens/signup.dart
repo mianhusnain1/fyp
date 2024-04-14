@@ -307,6 +307,8 @@
 // Widget _doctorsignup(){
 //   return Form(child: Text(":"),);
 // }
+import 'package:doctor/Screens/Verify.dart';
+import 'package:doctor/Screens/diaolog.dart';
 import 'package:doctor/Screens/home.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
@@ -500,10 +502,32 @@ Widget _doctor(){
               .createUserWithEmailAndPassword(
                 email: emailcontroller.text.toString(), 
                 password: passwordcontroller.text.toString()).then((value) => 
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Home())));
+                Navigator.pushReplacement(context, MaterialPageRoute
+                (builder: (context)=> Verify())));
 
               
-            } catch (e) {
+            } on FirebaseAuthException catch (e) {
+              if (e.code == "email-already-in-use") {
+                Dialogs().errorDialog(context, "Error", "Email Already in Use", () { Navigator.of(context).pop(); });
+                
+              } 
+              else  if (e.code == "weak-password"){
+                      Dialogs().errorDialog(context, "Error", "Weak Password", () { Navigator.of(context).pop();});
+                      // Dialogs().errorDialog(context, "Error", "Weak Password");
+
+
+                      
+                    }
+                    else if (
+                      e.code == "network-request-failed"
+                    ) {
+                      Dialogs().errorDialog(context, "Error", "Network Issue", (){ Navigator.of(context).pop();});
+
+                    }
+                    else {
+                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong", (){Navigator.of(context).pop();}, );
+                    }
+            
               print("Error is $e");
               
             }
