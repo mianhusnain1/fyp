@@ -494,6 +494,7 @@ Widget _doctor(){
           width:  mq.width - 40,
           child: _inputField(confirmpassword, isPassword:  true),
         ),
+         const SizedBox(height: 15,),
         SizedBox(
           child: btn(title: "SIGN UP", action: () async{
             try {
@@ -611,22 +612,70 @@ Widget _doctor(){
         ),
         SizedBox(
           height:  mq.height * .06,
+          width: mq.width - 40,
           
           child: _inputField( namecontroller, isName:  true),
         ),
         const SizedBox(height: 15,),
         SizedBox(
           height:  mq.height * .06,
+          width: mq.width - 40,
           child: _inputField(emailcontroller, isName: false),
 
         ),
         const SizedBox(height: 15,),
         SizedBox(
-          height: mq.height *0.06, child: _inputField(passwordcontroller,
+          height: mq.height *0.06,
+          width: mq.width - 40,
+           child: _inputField(passwordcontroller,
         isPassword:  true),),
+       
+       const SizedBox(height: 15,),
+
         SizedBox(
-          child: Text("data"),
-        )
+
+           height: mq.height *0.06,
+           width: mq.width - 40,
+          child: _inputField(confirmpassword, isPassword:  true)
+        ),
+        const SizedBox(height: 15,),
+        SizedBox(child: btn(title: "SIGN UP", action: ()
+        async{
+            try {
+              final auth = FirebaseAuth.instance;
+              await auth 
+              .createUserWithEmailAndPassword(
+                email: emailcontroller.text.toString(), 
+                password: passwordcontroller.text.toString()).then((value) => 
+                Navigator.pushReplacement(context, MaterialPageRoute
+                (builder: (context)=> Verify())));
+
+              
+            } on FirebaseAuthException catch (e) {
+              if (e.code == "email-already-in-use") {
+                Dialogs().errorDialog(context, "Error", "Email Already in Use", () { Navigator.of(context).pop(); });
+                
+              } 
+              else  if (e.code == "weak-password"){
+                      Dialogs().errorDialog(context, "Error", "Weak Password", () { Navigator.of(context).pop();});
+                      // Dialogs().errorDialog(context, "Error", "Weak Password");
+
+
+                      
+                    }
+                    else if (
+                      e.code == "network-request-failed"
+                    ) {
+                      Dialogs().errorDialog(context, "Error", "Network Issue", (){ Navigator.of(context).pop();});
+
+                    }
+                    else {
+                      Dialogs().errorDialog(context, "Error", "Something Wents Wrong", (){Navigator.of(context).pop();}, );
+                    }
+            
+              print("Error is $e");
+              
+            }}),)
         ],
     
   );

@@ -18,6 +18,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Hello"),
+        backgroundColor: myColor1,
+      ),
       backgroundColor: Colors.white,
       body: Container(
         height: double.infinity,
@@ -226,6 +230,9 @@ class Home extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
+                SizedBox(
+                  height:  MediaQuery.of(context).size.height * .2, 
+                )
                 // SizedBox(
                 //   height: MediaQuery.of(context).size.height,
                 //   width: MediaQuery.of(context).size.width,
@@ -248,6 +255,7 @@ class Home extends StatelessWidget {
                 //   ),
                 // )
 
+                ,
                 Container(
                   height: MediaQuery.of(context).size.height * .2,
                   width: MediaQuery.of(context).size.width - 40,
