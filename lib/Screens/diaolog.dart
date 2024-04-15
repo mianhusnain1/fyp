@@ -1,4 +1,5 @@
 // import 'package:doctor/main.dart';
+import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
 
@@ -51,6 +52,7 @@ static void showMessage1 (BuildContext context){
 
   Future<void> errorDialog(BuildContext context, String title, String massage, VoidCallback btn1 ) {
     return showDialog(
+      barrierColor: Color(6),
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(title),

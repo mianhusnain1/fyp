@@ -310,6 +310,7 @@
 import 'package:doctor/Screens/Verify.dart';
 import 'package:doctor/Screens/diaolog.dart';
 import 'package:doctor/Screens/home.dart';
+import 'package:doctor/Screens/login.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -383,6 +384,7 @@ Widget _Bottom(){
     child: Card(
       color: Colors.white,
       
+      semanticContainer: false,
       
         shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -457,17 +459,18 @@ Widget _doctor(){
         
       ],
     ),
-    SizedBox(
-          height: MediaQuery.of(context).size.height * .01,
-        ),
-        const Text(
-          "Welcome",
-          style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
-              color: myColor1,
-              letterSpacing: .4),
-        ),
+    // SizedBox(
+    //       height: MediaQuery.of(context).size.height * .01,
+    //     ),
+    //     const Text(
+    //       "Welcome",
+    //       style: TextStyle(
+    //           fontSize: 26,
+    //           fontWeight: FontWeight.w600,
+    //           color: myColor1,
+    //           letterSpacing: .4),
+    //     ),
+    SizedBox(height: 10,),
         SizedBox(
           height:  mq.height * .06,
            width: mq.width - 40,
@@ -486,7 +489,7 @@ Widget _doctor(){
            width: mq.width - 40,
             child: _inputField(passwordcontroller,
         isPassword:  true),),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         SizedBox(
@@ -504,7 +507,7 @@ Widget _doctor(){
                 email: emailcontroller.text.toString(), 
                 password: passwordcontroller.text.toString()).then((value) => 
                 Navigator.pushReplacement(context, MaterialPageRoute
-                (builder: (context)=> Verify())));
+                (builder: (context)=> const Verify())));
 
               
             } on FirebaseAuthException catch (e) {
@@ -533,7 +536,26 @@ Widget _doctor(){
               
             }
           }),
-        )
+        ),
+        const SizedBox(height: 15,),
+             SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text("Already have an account?",
+                style: TextStyle( fontSize: 15),), InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: ((context) => Login())));
+                  },
+                  child: Text(" Login", 
+                  style:  TextStyle(
+                    color: myColor1,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold
+                  ),),
+                )],
+              )
+            )
         ],
     
   );
@@ -599,17 +621,18 @@ Widget _doctor(){
         
       ],
     ),
-    SizedBox(
-          height: MediaQuery.of(context).size.height * .01,
-        ),
-        const Text(
-          "Welcome",
-          style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
-              color: myColor1,
-              letterSpacing: .4),
-        ),
+    SizedBox(height: 10,),
+    // SizedBox(
+    //       height: MediaQuery.of(context).size.height * .01,
+    //     ),
+    //     const Text(
+    //       "Welcome",
+    //       style: TextStyle(
+    //           fontSize: 26,
+    //           fontWeight: FontWeight.w600,
+    //           color: myColor1,
+    //           letterSpacing: .4),
+    //     ),
         SizedBox(
           height:  mq.height * .06,
           width: mq.width - 40,
@@ -648,7 +671,7 @@ Widget _doctor(){
                 email: emailcontroller.text.toString(), 
                 password: passwordcontroller.text.toString()).then((value) => 
                 Navigator.pushReplacement(context, MaterialPageRoute
-                (builder: (context)=> Verify())));
+                (builder: (context)=> const Verify())));
 
               
             } on FirebaseAuthException catch (e) {
@@ -675,7 +698,26 @@ Widget _doctor(){
             
               print("Error is $e");
               
-            }}),)
+            }}),),
+            const SizedBox(height: 15,),
+             SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [Text("Already have an account?",
+                style: TextStyle( fontSize: 15),), InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: ((context) => Login())));
+                  },
+                  child: Text(" Login", 
+                  style:  TextStyle(
+                    color: myColor1,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold
+                  ),),
+                )],
+              )
+            )
         ],
     
   );
@@ -711,7 +753,7 @@ Widget _inputField ( TextEditingController controller,
             ? "Enter Name"
             : "Enter Email",
         hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
-        prefixIconColor: myColor,
+        prefixIconColor: myColor1,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
@@ -726,8 +768,8 @@ Widget _inputField ( TextEditingController controller,
       });
     }, icon: (
       confirmpass 
-         ? Icon(Icons.visibility)
-         : Icon(Icons.visibility_off)))
+         ? const Icon(Icons.visibility)
+         : const Icon(Icons.visibility_off)))
     :null
     
   )
