@@ -33,6 +33,7 @@ class Navbar extends StatelessWidget {
           shape: Border(
           
           ),
+          focusColor: myColor1,
           tileColor: Colors.white,
             leading: const Icon(Icons.person, ),
             iconColor: myColor1,
