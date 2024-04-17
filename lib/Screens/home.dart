@@ -1,12 +1,6 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
-// import 'dart:html';
-
-// import 'package:doctor_app/main.dart';
-// import 'package:doctor_app/screens/booking.dart';
-// import 'package:doctor_app/screens/video.dart';
-// import 'package:doctor_app/widgets/widgets.dart';
 import 'package:doctor/Screens/booking.dart';
+import 'package:doctor/Screens/navbar.dart';
 import 'package:doctor/Screens/video.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
@@ -18,8 +12,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Navbar(),
       appBar: AppBar(
-        title: Text("Hello"),
+        title: Center(child: Text("Doctor")),
         backgroundColor: myColor1,
       ),
       backgroundColor: Colors.white,

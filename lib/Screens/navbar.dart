@@ -12,7 +12,10 @@ class Navbar extends StatelessWidget {
           accountEmail: Text(""),
           currentAccountPicture: CircleAvatar(
             child: ClipOval(
-              child: Image.asset("Assets/images/Profile.jpg"),
+              child: Image.asset("images/Profile.jpg",
+              height: 90,
+              width: 80,),
+              
             ) ,
           ),
         
