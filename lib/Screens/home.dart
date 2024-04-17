@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       drawer: Navbar(),
       appBar: AppBar(
-        title: Center(child: Text("Doctor")),
+        title: Text("Doctor"),
         backgroundColor: myColor1,
       ),
       backgroundColor: Colors.white,

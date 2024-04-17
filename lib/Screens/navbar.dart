@@ -1,3 +1,4 @@
+import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -8,17 +9,39 @@ class Navbar extends StatelessWidget {
       child: ListView(
         children: [
         UserAccountsDrawerHeader(
-          accountName: Text(""), 
-          accountEmail: Text(""),
+        decoration: BoxDecoration(
+          color: Colors.white
+        ),
+          accountName: const Text(""), 
+          accountEmail: const Text(""),
           currentAccountPicture: CircleAvatar(
             child: ClipOval(
-              child: Image.asset("images/Profile.jpg",
-              height: 90,
-              width: 80,),
+              child: Image.asset(
+                "images/Profile.jpg",
+                fit: BoxFit.cover,
+              ),
+              
               
             ) ,
+            radius: 20,
           ),
         
+          ),
+          
+        ListTile(
+          onTap: () {},
+          shape: Border(
+          
+          ),
+          tileColor: Colors.white,
+            leading: const Icon(Icons.person, ),
+            iconColor: myColor1,
+            title: const Text("Find a Doctor", 
+            style: TextStyle(
+              color: myColor1,
+              fontWeight: FontWeight.bold
+            ), ),
+            trailing: const Icon(Icons.arrow_forward),
           )
         ],
         
