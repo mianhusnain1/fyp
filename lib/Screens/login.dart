@@ -55,37 +55,37 @@ class _LoginState extends State<Login> {
                     height: 40,
                   ),
                   SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: TextFormField(
-                        controller: emailcontroller,
-                        validator: (value) {
-                          if (value != null && value.isNotEmpty) {
-                            return null;
-                          } else {
-                            return "Required";
-                          }
-                        },
-                        decoration: InputDecoration(
-                            label: const Text("Email"),
-                            prefixIcon: const Icon(Icons.person),
-                            prefixIconColor: Colors.blue,
-                            hintText: "Enter Email",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(color: Colors.blue),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.only(top: 6, left: 12)),
-                      ),
+                    height: mq.height * 0.06,
+                    width: mq.width - 40,
+                    child: TextFormField(
+                      controller: emailcontroller,
+                      validator: (value) {
+                        if (value != null && value.isNotEmpty) {
+                          return null;
+                        } else {
+                          return "Required";
+                        }
+                      },
+                      decoration: InputDecoration(
+                          label: const Text("Email"),
+                          prefixIcon: const Icon(Icons.person),
+                          prefixIconColor: myColor1,
+                          hintText: "Enter Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: const BorderSide(color: Colors.blue),
+                          ),
+                          contentPadding:
+                              const EdgeInsets.only(top: 6, left: 12)),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  SizedBox(
+                    height: mq.height * 0.06,
+                    width: mq.width - 40,
                     child: TextFormField(
                       controller: passwordcontroller,
                       obscureText: _isobscure,
@@ -97,7 +97,7 @@ class _LoginState extends State<Login> {
                       decoration: InputDecoration(
                           label: const Text("Password"),
                           prefixIcon: const Icon(Icons.lock),
-                          prefixIconColor: Colors.blue,
+                          prefixIconColor: myColor1,
                           suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -226,7 +226,10 @@ class _LoginState extends State<Login> {
                             child: const Text(
                               " SIGN UP",
                               style: TextStyle(
-                                  color: myColor, fontWeight: FontWeight.bold),
+                                color: myColor1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
                             ))
                       ],
                     ),
