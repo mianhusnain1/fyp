@@ -12,9 +12,9 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Navbar(),
+      drawer: const Navbar(),
       appBar: AppBar(
-        title: Text("Doctor"),
+        title: const Text("Doctor"),
         backgroundColor: myColor1,
       ),
       backgroundColor: Colors.white,
@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
                 child:  Container(
                   height: MediaQuery.of(context).size.height *0.06,
                   width: MediaQuery.of(context).size.width - 30,
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.search,color: myColor1,),
                       SizedBox(width: 10,),
@@ -49,15 +49,15 @@ class Home extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 14),
+                      margin: const EdgeInsets.symmetric(vertical: 14),
                       height: MediaQuery.of(context).size.height * 0.15,
                       width: MediaQuery.of(context).size.width - 40,
                       decoration: BoxDecoration(
                           color: myColor1,
                           borderRadius: BorderRadius.circular(20)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text(
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
                           "Your Wallet",
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
                               BoxShadow(
                                   color: Colors.black.withOpacity(0.4),
                                   blurRadius: 4,
-                                  offset: Offset(1, 3))
+                                  offset: const Offset(1, 3))
                             ]),
                         child: const Center(
                           child: Text(
@@ -110,8 +110,8 @@ class Home extends StatelessWidget {
                         ],
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(color: myColor1)),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Padding(
                           padding: EdgeInsets.only(left: 11.0),
                           child: Icon(
@@ -161,7 +161,7 @@ class Home extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Booking(),
+                          builder: (context) => const Booking(),
                         ));
                   },
                   child: Container(
@@ -170,8 +170,8 @@ class Home extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: myColor1)),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Padding(
                           padding: EdgeInsets.only(left: 9.0),
                           child: CircleAvatar(
@@ -205,7 +205,7 @@ class Home extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Video(),
+                          builder: (context) => const Video(),
                         ));
                   },
                   child: Container(
@@ -214,8 +214,8 @@ class Home extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: myColor1)),
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Padding(
                           padding: EdgeInsets.only(left: 9.0),
                           child: CircleAvatar(

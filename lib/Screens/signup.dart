@@ -381,18 +381,16 @@ Widget _Bottom(){
   
   return  SizedBox(
    
-    child: Card(
-      color: Colors.white,
-      
-      semanticContainer: false,
-      
-        shape: const RoundedRectangleBorder(
+    child: Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
          topRight: Radius.circular(20)
         ),
         
       ),
+      
       child: userType == 'patient' ? _patient() : _doctor(),
     ),
   );
