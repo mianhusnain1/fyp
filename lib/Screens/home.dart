@@ -25,7 +25,26 @@ class Home extends StatelessWidget {
           children: [
             Column(
               children: [
-                const MainTop(),
+               SizedBox(
+                child:  Container(
+                  height: MediaQuery.of(context).size.height *0.06,
+                  width: MediaQuery.of(context).size.width - 30,
+                  child: Row(
+                    children: [
+                      Icon(Icons.search,color: myColor1,),
+                      SizedBox(width: 10,),
+                      Text("Search any Doctor",
+                      style: TextStyle(
+                        color: myColor1,
+                        fontSize: 18
+                      ),),
+
+                    ],
+                  ),
+               
+                ),,
+               ),
+                
                 const SizedBox(),
                 Stack(
                   children: [
