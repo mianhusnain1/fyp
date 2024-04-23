@@ -1,4 +1,4 @@
-import 'package:doctor/Screens/diaolog.dart';
+import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/Screens/done.dart';
 import 'package:doctor/Screens/login.dart';
 import 'package:doctor/Screens/widgets.dart';
@@ -6,7 +6,6 @@ import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 // import 'package:doctor_app/screens/verify.dart';
 
@@ -44,36 +43,27 @@ class _ForgetState extends State<Forget> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
-                                controller: emailController,
-                               
-                                validator: (value) {
-                                              return value != null && value.isNotEmpty 
-                                              ? null
-                                              : "Required";
-                                            }, 
-                              
-                                decoration: InputDecoration(
-                                  
-                                  label: const Text("Email"),
-                                  prefixIcon: const Icon(Icons.lock),
-                                  prefixIconColor: Colors.blue,
-                                  
-                                  hintText: "Enter Email",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                  
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(30),
-                                    borderSide: const BorderSide(color: Colors.blue),
-                                    
-                                  ),
-                                  contentPadding: const EdgeInsets.only(
-                                    top: 6,
-                                    left: 12
-                                  )
-                                ),
-                              ),
+                      controller: emailController,
+                      validator: (value) {
+                        return value != null && value.isNotEmpty
+                            ? null
+                            : "Required";
+                      },
+                      decoration: InputDecoration(
+                          label: const Text("Email"),
+                          prefixIcon: const Icon(Icons.lock),
+                          prefixIconColor: Colors.blue,
+                          hintText: "Enter Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: const BorderSide(color: Colors.blue),
+                          ),
+                          contentPadding:
+                              const EdgeInsets.only(top: 6, left: 12)),
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -82,17 +72,22 @@ class _ForgetState extends State<Forget> {
                     width: mq.width - 80,
                     child: InkWell(
                       onTap: () async {
-                        if (_emailkey.currentState != null && _emailkey.currentState!.validate()) {
-                          _emailkey.currentState!.save();                          
+                        if (_emailkey.currentState != null &&
+                            _emailkey.currentState!.validate()) {
+                          _emailkey.currentState!.save();
                         }
-              
+
                         try {
-                          showDialog(context: context, builder: (context){
-                            return const Center(child: CircularProgressIndicator());
-                          });
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              });
                           final auth = FirebaseAuth.instance;
                           await auth
-                              .sendPasswordResetEmail(email: emailController.text)
+                              .sendPasswordResetEmail(
+                                  email: emailController.text)
                               .then((value) => Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -102,26 +97,23 @@ class _ForgetState extends State<Forget> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => const Login(),
+                                              builder: (context) =>
+                                                  const Login(),
                                             ));
                                       },
                                       msg:
                                           "We have sent you an email. Please update your password and login again.",
                                     ),
                                   )));
-                                  Navigator.of(context).pop();
+                          Navigator.of(context).pop();
                         } on FirebaseAuthException catch (e) {
-                           Navigator.of(context).pop();
+                          Navigator.of(context).pop();
                           if (e.code == "network-request-failed") {
-                            Dialogs().errorDialog(context, "Error", "Please Check your internet connection", () { 
+                            Dialogs().errorDialog(context, "Error",
+                                "Please Check your internet connection", () {
                               Navigator.of(context).pop();
                             });
-                            
-                            
-                          } else {
-                            
-                          }
-              
+                          } else {}
                         }
                       },
                       child: Container(
@@ -145,25 +137,31 @@ class _ForgetState extends State<Forget> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20,),
-                 Row(
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       SizedBox(
+                      SizedBox(
                         child: Icon(Icons.arrow_back),
                       ),
                       SizedBox(
                         child: InkWell(
                           onTap: () {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Login()));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Login()));
                           },
-                          child: Text("Back to Login", style: TextStyle(
-                            color: myColor1,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20
-                          ),),
+                          child: Text(
+                            "Back to Login",
+                            style: TextStyle(
+                                color: myColor1,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
                         ),
-                        
                       ),
                     ],
                   )

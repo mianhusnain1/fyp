@@ -1,15 +1,7 @@
 // import 'package:doctor/main.dart';
-import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Dialogs {
-
-static void showMessage1 (BuildContext context){
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("")));
-}
-
   static void showMassage(BuildContext context, String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -35,7 +27,6 @@ static void showMessage1 (BuildContext context){
                 right: 20,
                 bottom: 12,
               ),
-              
               child: Text(
                 msg,
                 style: const TextStyle(
@@ -50,22 +41,18 @@ static void showMessage1 (BuildContext context){
     );
   }
 
-  Future<void> errorDialog(BuildContext context, String title, String massage, VoidCallback btn1 ) {
+  Future<void> errorDialog(
+      BuildContext context, String title, String massage, VoidCallback btn1) {
     return showDialog(
-      
       context: context,
       builder: (context) => SimpleDialog(
         title: Text(title),
-        // backgroundColor: myColor,
-        
         children: [
           Padding(
             padding: const EdgeInsets.only(
               left: 25,
               right: 20,
               bottom: 12,
-              
-              
             ),
             child: Text(
               massage,
@@ -73,40 +60,20 @@ static void showMessage1 (BuildContext context){
                 fontSize: 16,
               ),
             ),
-            
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                child: InkWell(
+              InkWell(
                   hoverColor: Colors.blue,
                   focusColor: Colors.red,
                   onTap: btn1,
-                  child: Text("Close")),
-
-              ),
-              Container(
-                child: InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: Text("Got It")),
-              )
+                  child: const Text("Close")),
+              InkWell(onTap: () {}, child: const Text("Got It"))
             ],
           ),
-          
-          // TextButton(
-          //   onPressed: btn1,
-          //   child: const Text('Ok'),
-          // )
         ],
       ),
     );
   }
 }
-
-
-class Fucntion {
-
-} //must capital letter

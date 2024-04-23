@@ -1,10 +1,10 @@
-import 'package:doctor/Screens/diaolog.dart';
+// ignore_for_file: use_build_context_synchronously, file_names, avoid_print
+
+import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/Screens/login.dart';
-import 'package:doctor/Screens/signup.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 
 class Verify extends StatefulWidget {
@@ -19,7 +19,7 @@ class _VerifyState extends State<Verify> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body: SizedBox(
         height: double.infinity,
         width: MediaQuery.of(context).size.width,
         child: ListView(
@@ -32,7 +32,6 @@ class _VerifyState extends State<Verify> {
                   height: 20,
                 ),
                 SizedBox(
-                  // ignore: sized_box_for_whitespace
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -53,24 +52,31 @@ class _VerifyState extends State<Verify> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 80,
-                  child: btn(title: "Verify", action: () async{
-                    final user = FirebaseAuth.instance.currentUser;
+                  child: btn(
+                    title: "Verify",
+                    action: () async {
+                      final user = FirebaseAuth.instance.currentUser;
 
-                    try { await user!.sendEmailVerification().then((value) => (){
-                      Dialogs().errorDialog(context, "Process", "We have sent you a verification email.", (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> Login()));});
-                       
-                    });
-                      
-                    } catch (e) { 
-                      print(e);
-                      Dialogs().errorDialog(context, "Error", "Something Went Wrong", (){Navigator.of(context).pop();});
-                      
-                    }
-
-
-
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Signup(),));
-                  })
+                      try {
+                        await user!.sendEmailVerification().then((value) => () {
+                              Dialogs().errorDialog(context, "Process",
+                                  "We have sent you a verification email.", () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const Login(),
+                                  ),
+                                );
+                              });
+                            });
+                      } catch (e) {
+                        print(e);
+                        Dialogs().errorDialog(
+                            context, "Error", "Something Went Wrong", () {
+                          Navigator.of(context).pop();
+                        });
+                      }
+                    },
+                  ),
                 )
               ],
             )
