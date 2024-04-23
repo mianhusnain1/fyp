@@ -13,7 +13,7 @@ class AuthDialogs {
         backgroundColor: Colors.white,
         title: const Text(
           'Logout',
-          style: TextStyle(color: myColor1),
+          style: TextStyle(color: darkColor),
         ),
         children: [
           const Padding(
@@ -40,7 +40,7 @@ class AuthDialogs {
                     child: const Text(
                       'Cancel',
                       style: TextStyle(
-                          color: myColor1, fontWeight: FontWeight.bold),
+                          color: darkColor, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -53,8 +53,8 @@ class AuthDialogs {
                   },
                   child: const Text(
                     'Logout',
-                    style:
-                        TextStyle(color: myColor1, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: darkColor, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
