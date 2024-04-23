@@ -1,3 +1,4 @@
+import 'package:doctor/main.dart';
 import 'package:doctor/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,16 @@ class AuthDialogs {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('LogOut?'),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Logout',
+          style: TextStyle(color: myColor1),
+        ),
         children: [
           const Padding(
             padding: EdgeInsets.only(left: 25, bottom: 12, right: 20),
             child: Text(
-              "Are you sure You want to\nLogOut",
+              "Are you sure You want to\nLogout ?",
               style: TextStyle(
                 fontSize: 16,
               ),
@@ -32,7 +37,11 @@ class AuthDialogs {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Cencel'),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(
+                          color: myColor1, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 TextButton(
@@ -42,7 +51,11 @@ class AuthDialogs {
                               context, loginroute, (route) => false),
                         );
                   },
-                  child: const Text('Logout'),
+                  child: const Text(
+                    'Logout',
+                    style:
+                        TextStyle(color: myColor1, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),

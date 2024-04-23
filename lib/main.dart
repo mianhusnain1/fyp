@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       routes: {

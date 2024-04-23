@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/auth/forget.dart';
 import 'package:doctor/auth/signup.dart';
+import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:doctor/routes/routes.dart';
