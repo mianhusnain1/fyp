@@ -69,14 +69,14 @@ class _LoginState extends State<Login> {
                         decoration: InputDecoration(
                             label: const Text("Email"),
                             prefixIcon: const Icon(Icons.person),
-                            prefixIconColor: Colors.blue,
+                            prefixIconColor: darkColor,
                             hintText: "Enter Email",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
-                              borderSide: const BorderSide(color: Colors.blue),
+                              borderSide: const BorderSide(color: darkColor),
                             ),
                             contentPadding:
                                 const EdgeInsets.only(top: 6, left: 12)),
@@ -97,7 +97,7 @@ class _LoginState extends State<Login> {
                       decoration: InputDecoration(
                           label: const Text("Password"),
                           prefixIcon: const Icon(Icons.lock),
-                          prefixIconColor: Colors.blue,
+                          prefixIconColor: darkColor,
                           suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(color: Colors.blue),
+                            borderSide: const BorderSide(color: darkColor),
                           ),
                           contentPadding:
                               const EdgeInsets.only(top: 6, left: 12)),
@@ -226,8 +226,9 @@ class _LoginState extends State<Login> {
                             child: const Text(
                               " SIGN UP",
                               style: TextStyle(
-                                  color: lightColor,
-                                  fontWeight: FontWeight.bold),
+                                  color: darkColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17),
                             ))
                       ],
                     ),
