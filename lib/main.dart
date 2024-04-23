@@ -1,7 +1,5 @@
 import 'package:doctor/Screens/splash.dart';
 import 'package:doctor/firebase_options.dart';
-import 'package:doctor/routes/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
