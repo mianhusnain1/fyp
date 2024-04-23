@@ -1,8 +1,10 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file: use_build_context_synchronously, avoid_print, non_constant_identifier_names
 
-import 'package:doctor/Screens/Verify.dart';
-import 'package:doctor/widgets/diaolog.dart';
-import 'package:doctor/Screens/login.dart';
+import 'package:doctor/auth/Verify.dart';
+import 'package:doctor/models/client_model.dart';
+import 'package:doctor/models/doctor_model.dart';
+import 'package:doctor/widgets/dialogs.dart';
+import 'package:doctor/auth/login.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:doctor/models/user_model.dart';
@@ -26,14 +28,166 @@ class _SignupState extends State<Signup> {
   TextEditingController confirmpassword = TextEditingController();
   String userType = "";
   String? _selectedSpecialization;
-  List<String> _specializations = [
+  final List<String> _specializations = [
     'Cardiologist',
     'Orthopedic',
     'Neurosurgeon',
     'General Physician',
   ];
+  bool isLoading = false;
+  Future<void> patientSignUp() async {
+    try {
+      final newUser =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailcontroller.text.toString(),
+        password: passwordcontroller.text.toString(),
+      );
+      final pUser = UserModel(
+        name: namecontroller.text.toString(),
+        id: newUser.user!.uid,
+        email: emailcontroller.text.toString(),
+        role: userType,
+      );
+      await Services.firestore.collection("users").doc(newUser.user!.uid).set(
+            pUser.toJson(),
+          );
+      final tUser = ClientModel(
+        name: namecontroller.text.toString(),
+        id: newUser.user!.uid,
+        email: emailcontroller.text.toString(),
+        image: newUser.user!.photoURL ?? "",
+        phone: '',
+        address: '',
+        city: '',
+      );
+      await Services.firestore
+          .collection("patient")
+          .doc(newUser.user!.uid)
+          .set(
+            tUser.toJson(),
+          )
+          .then(
+            (value) => {
+              setState(() {
+                isLoading = false;
+              }),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Verify(),
+                ),
+              ),
+            },
+          );
+    } on FirebaseAuthException catch (e) {
+      print("Error is $e.code}");
+      if (e.code == 'email-already-in-use') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss()
+            .errorDialog(context, 'Error Occured', "Email Already in use");
+      } else if (e.code == 'weak-password') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss().errorDialog(
+            context, 'Error Occured', "Password must contained 6 letters");
+      } else if (e.code == 'network-request-failed') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss().errorDialog(context, 'Error Occured',
+            "Bad Connection. Please check your internet");
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss()
+            .errorDialog(context, 'Error Occured', "Something wents wrong");
+      }
+    }
+  }
 
-  // bool obscure = true;
+  Future<void> doctoreSignUp() async {
+    try {
+      final newUser =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailcontroller.text.toString(),
+        password: passwordcontroller.text.toString(),
+      );
+      final pUser = UserModel(
+        name: namecontroller.text.toString(),
+        id: newUser.user!.uid,
+        email: emailcontroller.text.toString(),
+        role: userType,
+      );
+      await Services.firestore.collection("users").doc(newUser.user!.uid).set(
+            pUser.toJson(),
+          );
+      final tUser = DoctorModel(
+        name: namecontroller.text.toString(),
+        id: newUser.user!.uid,
+        email: emailcontroller.text.toString(),
+        image: newUser.user!.photoURL ?? "",
+        address: '',
+        bio: '',
+        phone: '',
+        licence: '',
+        city: '',
+        schedule: '',
+        availability: false,
+        catagory: _selectedSpecialization!,
+      );
+      await Services.firestore
+          .collection("doctor")
+          .doc(newUser.user!.uid)
+          .set(
+            tUser.toJson(),
+          )
+          .then(
+            (value) => {
+              setState(() {
+                isLoading = false;
+              }),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Verify(),
+                ),
+              ),
+            },
+          );
+    } on FirebaseAuthException catch (e) {
+      print("Error is $e.code}");
+      if (e.code == 'email-already-in-use') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss()
+            .errorDialog(context, 'Error Occured', "Email Already in use");
+      } else if (e.code == 'weak-password') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss().errorDialog(
+            context, 'Error Occured', "Password must contained 6 letters");
+      } else if (e.code == 'network-request-failed') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss().errorDialog(context, 'Error Occured',
+            "Bad Connection. Please check your internet");
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss()
+            .errorDialog(context, 'Error Occured', "Something wents wrong");
+      }
+    }
+  }
+
   bool confirmpass = true;
   void selectUserType(String user) {
     setState(() {
@@ -59,7 +213,7 @@ class _SignupState extends State<Signup> {
                   "SIGN UP",
                   style: TextStyle(
                       fontSize: 35,
-                      color: myColor1,
+                      color: darkColor,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -103,9 +257,9 @@ class _SignupState extends State<Signup> {
                   height: 40,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: userType == 'patient' ? myColor : Colors.white,
+                      color: userType == 'patient' ? lightColor : Colors.white,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: myColor1)),
+                      border: Border.all(color: darkColor)),
                   child: Center(
                     child: Text(
                       "Patient",
@@ -133,9 +287,9 @@ class _SignupState extends State<Signup> {
                   height: 40,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: userType == 'doctor' ? myColor : Colors.white,
+                      color: userType == 'doctor' ? lightColor : Colors.white,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: myColor1)),
+                      border: Border.all(color: darkColor)),
                   child: Center(
                       child: Text(
                     "Doctor",
@@ -161,7 +315,7 @@ class _SignupState extends State<Signup> {
           height: 15,
         ),
         Container(
-          height: 52,
+          height: 50,
           width: MediaQuery.of(context).size.width - 40,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
@@ -174,7 +328,7 @@ class _SignupState extends State<Signup> {
               value: _selectedSpecialization,
               onChanged: (String? value) {
                 setState(() {
-                  _selectedSpecialization = value;
+                  _selectedSpecialization = value!;
                 });
               },
               items: _specializations.map((String specialization) {
@@ -217,45 +371,17 @@ class _SignupState extends State<Signup> {
           child: btn(
               title: "SIGN UP",
               action: () async {
-                try {
-                  final auth = FirebaseAuth.instance;
-                  await auth
-                      .createUserWithEmailAndPassword(
-                          email: emailcontroller.text.toString(),
-                          password: passwordcontroller.text.toString())
-                      .then((value) => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Verify())));
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == "email-already-in-use") {
-                    Dialogs().errorDialog(
-                        context, "Error", "Email Already in Use", () {
-                      Navigator.of(context).pop();
-                    });
-                  } else if (e.code == "weak-password") {
-                    Dialogs().errorDialog(context, "Error", "Weak Password",
-                        () {
-                      Navigator.of(context).pop();
-                    });
-                    // Dialogs().errorDialog(context, "Error", "Weak Password");
-                  } else if (e.code == "network-request-failed") {
-                    Dialogs().errorDialog(context, "Error", "Network Issue",
-                        () {
-                      Navigator.of(context).pop();
-                    });
+                print(_selectedSpecialization);
+                if (userType != "") {
+                  if (_selectedSpecialization != null) {
+                    doctoreSignUp();
                   } else {
-                    Dialogs().errorDialog(
-                      context,
-                      "Error",
-                      "Something Wents Wrong",
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
+                    Dialogss().errorDialog(context, "Error Occured",
+                        "Please select your specialization catagory first");
                   }
-
-                  print("Error is $e");
+                } else {
+                  Dialogss().errorDialog(
+                      context, "Error Occured", "Please user catagory first");
                 }
               }),
         ),
@@ -278,7 +404,9 @@ class _SignupState extends State<Signup> {
               child: const Text(
                 " Login",
                 style: TextStyle(
-                    color: myColor1, fontSize: 17, fontWeight: FontWeight.bold),
+                    color: darkColor,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],
@@ -315,9 +443,9 @@ class _SignupState extends State<Signup> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                      color: userType == 'patient' ? myColor : Colors.white,
+                      color: userType == 'patient' ? lightColor : Colors.white,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: myColor1)),
+                      border: Border.all(color: darkColor)),
                 ),
               ),
             ),
@@ -335,9 +463,9 @@ class _SignupState extends State<Signup> {
                   height: 40,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: userType == 'doctor' ? myColor : Colors.white,
+                      color: userType == 'doctor' ? lightColor : Colors.white,
                       borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: myColor1)),
+                      border: Border.all(color: darkColor)),
                   child: Center(
                       child: Text(
                     "Doctor",
@@ -389,60 +517,7 @@ class _SignupState extends State<Signup> {
           child: btn(
               title: "SIGN UP",
               action: () async {
-                try {
-                  final auth = FirebaseAuth.instance;
-                  await auth
-                      .createUserWithEmailAndPassword(
-                          email: emailcontroller.text.toString(),
-                          password: passwordcontroller.text.toString())
-                      .then((value) => () async {
-                            final user = auth.currentUser;
-                            final finaluser = UserModel(
-                              name: namecontroller.text.toString(),
-                              email: emailcontroller.text.toString(),
-                              role: userType,
-                            );
-                            await Services.firestore
-                                .collection("users")
-                                .doc(user!.uid)
-                                .set(finaluser.toJson());
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Verify(),
-                              ),
-                            );
-                          });
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == "email-already-in-use") {
-                    Dialogs().errorDialog(
-                        context, "Error", "Email Already in Use", () {
-                      Navigator.of(context).pop();
-                    });
-                  } else if (e.code == "weak-password") {
-                    Dialogs().errorDialog(context, "Error", "Weak Password",
-                        () {
-                      Navigator.of(context).pop();
-                    });
-                    // Dialogs().errorDialog(context, "Error", "Weak Password");
-                  } else if (e.code == "network-request-failed") {
-                    Dialogs().errorDialog(context, "Error", "Network Issue",
-                        () {
-                      Navigator.of(context).pop();
-                    });
-                  } else {
-                    Dialogs().errorDialog(
-                      context,
-                      "Error",
-                      "Something Wents Wrong",
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  }
-
-                  print("Error is $e");
-                }
+                patientSignUp();
               }),
         ),
         const SizedBox(
@@ -464,7 +539,9 @@ class _SignupState extends State<Signup> {
               child: const Text(
                 " Login",
                 style: TextStyle(
-                    color: myColor1, fontSize: 17, fontWeight: FontWeight.bold),
+                    color: darkColor,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],
@@ -499,7 +576,7 @@ class _SignupState extends State<Signup> {
                     ? "Enter Name"
                     : "Enter Email",
             hintStyle: const TextStyle(fontSize: 13, color: Colors.grey),
-            prefixIconColor: myColor1,
+            prefixIconColor: darkColor,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(

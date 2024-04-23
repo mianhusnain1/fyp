@@ -1,6 +1,10 @@
-import 'package:doctor/Screens/Verify.dart';
-import 'package:doctor/Screens/home.dart';
-import 'package:doctor/Screens/login.dart';
+// ignore_for_file: avoid_print
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor/Screens/doctor/doctor_home.dart';
+import 'package:doctor/auth/Verify.dart';
+import 'package:doctor/Screens/patient/home.dart';
+import 'package:doctor/auth/login.dart';
 import 'package:doctor/Screens/splash.dart';
 import 'package:doctor/firebase_options.dart';
 import 'package:doctor/routes/routes.dart';
@@ -15,8 +19,8 @@ void main() async {
   runApp(const MyApp());
 }
 
-const Color myColor = Color(0xFF72DDE8);
-const Color myColor1 = Color(0xFF1D5761);
+const Color lightColor = Color(0xFF72DDE8);
+const Color darkColor = Color(0xFF1D5761);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -42,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         loginroute: (context) => const Login(),
-        homeroute: (context) => const Home(),
+        homeroute: (context) => const PatientHome(),
       },
       home: const Splash(),
     );
@@ -65,12 +69,61 @@ class _BuilderScreenState extends State<BuilderScreen> {
         final user = FirebaseAuth.instance.currentUser;
         if (user != null) {
           if (user.emailVerified) {
-            return const Home();
+            return const UserDeciderScreen();
           } else {
             return const Verify();
           }
         } else {
           return const Login();
+        }
+      },
+    );
+  }
+}
+
+class UserDeciderScreen extends StatefulWidget {
+  const UserDeciderScreen({super.key});
+
+  @override
+  State<UserDeciderScreen> createState() => _UserDeciderScreenState();
+}
+
+class _UserDeciderScreenState extends State<UserDeciderScreen> {
+  final user = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<String> getUser() async {
+    try {
+      final snapshot = await firestore.collection("users").doc(user!.uid).get();
+      final role = snapshot.data()?["role"];
+      print("My role is -- $role");
+      return role;
+    } catch (e) {
+      print(e);
+      return e.toString();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getUser(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+          // return const LoadingScreen();
+          case ConnectionState.active:
+          case ConnectionState.done:
+            final role = snapshot.data;
+            if (role == "patient" && role != null) {
+              return const PatientHome();
+            } else if (role == "doctor" && role != null) {
+              return const DoctorHomeScreen();
+            } else {
+              return const Login();
+            }
+          default:
+            return const Login();
         }
       },
     );

@@ -1,7 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, file_names, avoid_print
 
+import 'package:doctor/routes/routes.dart';
 import 'package:doctor/widgets/diaolog.dart';
-import 'package:doctor/Screens/login.dart';
+import 'package:doctor/auth/login.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +36,7 @@ class _VerifyState extends State<Verify> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: myColor1)),
+                        border: Border.all(color: darkColor)),
                     width: MediaQuery.of(context).size.width - 80,
                     child: const Padding(
                       padding: EdgeInsets.all(12.0),
@@ -75,6 +76,19 @@ class _VerifyState extends State<Verify> {
                           Navigator.of(context).pop();
                         });
                       }
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 80,
+                  child: btn(
+                    title: "Back to Login",
+                    action: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          loginroute, (route) => false);
                     },
                   ),
                 )

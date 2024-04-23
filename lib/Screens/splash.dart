@@ -30,7 +30,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(color: myColor),
+        decoration: const BoxDecoration(color: lightColor),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: const Column(

@@ -2,7 +2,6 @@ import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
-
 class Done extends StatefulWidget {
   const Done(
       {super.key,
@@ -65,7 +64,7 @@ class _DoneState extends State<Done> {
                   width: mq.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: myColor,
+                      color: lightColor,
                       boxShadow: const [
                         BoxShadow(
                             color: Colors.grey,

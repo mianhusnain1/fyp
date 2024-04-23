@@ -1,13 +1,10 @@
 import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/Screens/done.dart';
-import 'package:doctor/Screens/login.dart';
+import 'package:doctor/auth/login.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:doctor_app/screens/verify.dart';
 
 class Forget extends StatefulWidget {
   const Forget({super.key});
@@ -121,7 +118,7 @@ class _ForgetState extends State<Forget> {
                         width: mq.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: myColor,
+                            color: lightColor,
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey.shade400,
@@ -157,7 +154,7 @@ class _ForgetState extends State<Forget> {
                           child: Text(
                             "Back to Login",
                             style: TextStyle(
-                                color: myColor1,
+                                color: darkColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
