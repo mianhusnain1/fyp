@@ -1,4 +1,6 @@
 import 'package:doctor/main.dart';
+import 'package:doctor/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class Navbar extends StatelessWidget {
   const Navbar({super.key});
@@ -9,7 +11,7 @@ class Navbar extends StatelessWidget {
       child: ListView(
         children: [
         UserAccountsDrawerHeader(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white
         ),
           accountName: const Text(""), 
@@ -30,7 +32,7 @@ class Navbar extends StatelessWidget {
           
         ListTile(
           onTap: () {},
-          shape: Border(
+          shape: const Border(
           
           ),
           focusColor: myColor1,
@@ -46,7 +48,7 @@ class Navbar extends StatelessWidget {
           ),
            ListTile(
           onTap: () {},
-          shape: Border(
+          shape: const Border(
           
           ),
           focusColor: myColor1,
@@ -62,7 +64,7 @@ class Navbar extends StatelessWidget {
           ),
            ListTile(
           onTap: () {},
-          shape: Border(
+          shape: const Border(
           
           ),
           focusColor: myColor1,
@@ -78,7 +80,7 @@ class Navbar extends StatelessWidget {
           ),
            ListTile(
           onTap: () {},
-          shape: Border(
+          shape: const Border(
           
           ),
           focusColor: myColor1,
@@ -91,6 +93,19 @@ class Navbar extends StatelessWidget {
               fontWeight: FontWeight.bold
             ), ),
             trailing: const Icon(Icons.arrow_forward),
+          ),
+           ListTile(
+            onTap: ()async{
+              FirebaseAuth auth = FirebaseAuth.instance;
+              final user = auth.currentUser;
+              await auth.signOut().then((value) => (){
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamedAndRemoveUntil(loginroute, (route) => false);
+              });
+            },
+            leading: const Icon(Icons.logout),
+            title: Text("Logout"),
+            trailing: Icon(Icons.arrow_forward),
           )
           
         ],

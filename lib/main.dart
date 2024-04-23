@@ -1,6 +1,11 @@
 
+import 'package:doctor/Screens/Verify.dart';
+import 'package:doctor/Screens/home.dart';
+import 'package:doctor/Screens/login.dart';
 import 'package:doctor/Screens/splash.dart';
 import 'package:doctor/firebase_options.dart';
+import 'package:doctor/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -30,8 +35,39 @@ class MyApp extends StatelessWidget {
         useMaterial3: true, 
         
       ),
+      routes: {
+        homeroute:(context) => const Home(),
+        loginroute:(context) => const Login(),
+      },
       home: const Splash()
       //  const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+class BuilderScreen extends StatefulWidget {
+  const BuilderScreen({super.key});
+
+  @override
+  State<BuilderScreen> createState() => _BuilderScreenState();
+}
+
+class _BuilderScreenState extends State<BuilderScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          if (user.emailVerified) {
+            return Home();
+          } else {
+            return Verify();
+          }
+        } else {
+          return Login();
+        }
+      },
     );
   }
 }
