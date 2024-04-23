@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:doctor/Screens/diaolog.dart';
 import 'package:doctor/Screens/forget.dart';
 import 'package:doctor/Screens/home.dart';
 import 'package:doctor/Screens/signup.dart';
 import 'package:doctor/Screens/widgets.dart';
 import 'package:doctor/main.dart';
+import 'package:doctor/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,46 +92,45 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                   ),),
-                  const SizedBox(height: 20,)
-                 
-                    ,SizedBox(child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: TextFormField(
-                            controller: passwordcontroller,
-                            obscureText: _isobscure,
-                            validator: (value) {
-                                          return value != null && value.isNotEmpty 
-                                          ? null
-                                          : "Required";
-                                        }, 
-                          
-                            decoration: InputDecoration(
-                              
-                              label: const Text("Password"),
-                              prefixIcon: const Icon(Icons.lock),
-                              prefixIconColor: Colors.blue,
-                              suffixIcon: IconButton(onPressed: (){
-                               setState(() {
-                                 _isobscure = !_isobscure;
-                               });
-                              }, icon: Icon(Icons.visibility)),
-                              hintText: "Enter Password",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(color: Colors.blue),
-                                
-                              ),
-                              contentPadding: const EdgeInsets.only(
-                                top: 6,
-                                left: 12
-                              )
+                  const SizedBox(height: 20),
+                    Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: TextFormField(
+                          controller: passwordcontroller,
+                          obscureText: _isobscure,
+                          validator: (value) {
+                                        return value != null && value.isNotEmpty 
+                                        ? null
+                                        : "Required";
+                                      }, 
+                        
+                          decoration: InputDecoration(
+                            
+                            label: const Text("Password"),
+                            prefixIcon: const Icon(Icons.lock),
+                            prefixIconColor: Colors.blue,
+                            suffixIcon: IconButton(onPressed: (){
+                             setState(() {
+                               _isobscure = !_isobscure;
+                             });
+                            }, icon: const Icon(Icons.visibility)),
+                            hintText: "Enter Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            
                             ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              borderSide: const BorderSide(color: Colors.blue),
+                              
+                            ),
+                            contentPadding: const EdgeInsets.only(
+                              top: 6,
+                              left: 12
+                            )
                           ),
-                    ),),
+                        ),
+                                        ),
                     InkWell(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> const Forget()));
@@ -157,7 +159,7 @@ class _LoginState extends State<Login> {
                         });
               
                           final auth = FirebaseAuth.instance;
-                          await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.push(context, MaterialPageRoute(builder: (context) => const Home(),)),);
+                          await auth.signInWithEmailAndPassword(email: emailcontroller.text, password: passwordcontroller.text).then((value) => Navigator.of(context).pushNamedAndRemoveUntil(homeroute, (route) => false));
                           Navigator.of(context).pop();
                         } on FirebaseAuthException catch (e) {
                            Navigator.of(context).pop();
@@ -230,113 +232,6 @@ class _LoginState extends State<Login> {
   }
 }
 
-// import 'package:doctor/Screens/widgets.dart';
-// import 'package:doctor/main.dart';
-// import 'package:flutter/material.dart';
-
-// class Login extends StatefulWidget {
-//   const Login({super.key});
-
-//   @override
-//   State<Login> createState() => _LoginState();
-// }
-
-// class _LoginState extends State<Login> {
-//   late Size mq;
-//   @override
-//   Widget build(BuildContext context) {
-//     mq = MediaQuery.of(context).size;
-//     return Scaffold(
-//       backgroundColor: myColor,
-//       // appBar: AppBar(title: Text("Doctor App"), backgroundColor: Colors.amberAccent,),
-//       body: Stack(
-//         children: [
-//           Positioned(top: 80, child : _buildTop()),
-//           Positioned(bottom: 0,child: _buildBottom())
-//         ],
-
-        
-//       ),
-//     );
-//   }
-//   Widget _buildTop(){
-//   return const SizedBox(
-    
-    
-//     child: Logo()
-//   );
-// }
-// Widget _buildBottom(){
-//   return SizedBox(
-//     child: Card(
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(30)
-//       ),
-//       child: Padding(
-//         padding: const EdgeInsets.all(32.0),
-//         child: _buildForm(),
-//       ),
-//     ),
-    
-//   );
-// }
-
-// Widget _buildForm(){
-//   return const Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [Text("Welome", style: TextStyle(
-//       color: myColor, fontSize: 32, fontWeight: FontWeight.w500
-//     ),),
-//     TextContainer(Icons: Icons.email, Search: "Email" , isobscure: false,),
-//     SizedBox(height: 10,), // here i called the textcontainer that i created in widget file
-//     TextContainer(Icons: Icons.lock, Search: "Password", isobscure: true,),
-//     InkWell(
-      
-//       child: Padding(
-//         padding: EdgeInsets.only(top: 5.0),
-//         child: SizedBox(
-//           child: Text("Forget Password", style: TextStyle(fontWeight: FontWeight.bold)),
-//         ),
-//       ),
-
-    
-    
-//     ),
-
-//     SizedBox(
-//      height: 10,
-
-//     ),
-//     // SizedBox( child: _loginButton(),)
-//     SizedBox(
-//       child: LoginButton(),
-//     )
-//     ],
-   
-//   );
-// }
-// Widget _loginButton (){
-//   return ElevatedButton(onPressed: (){}, 
-//  style: ButtonStyle(),
-  
-  
-//   child: Text("LOGIN"));
-// }
-// Widget _buildOtherlogin(){
-//   return Center (child: Column(
-//     children: [ const SizedBox( height: 10,),
-//     Row(
-//       mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
-//       children: [
-//         Tab(icon: Image.asset("assests/images/facebook.png"),),
-//         Tab(icon: Image.asset("assests/images/twitter.png"),),
-//         Tab(icon: Image.asset("assests/images/github.png"),)
-//       ],
-//     )],
-//   ),);
-// }
-
-// }
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key, required this.img});
 // final VoidCallback ontap;

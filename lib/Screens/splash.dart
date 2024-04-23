@@ -29,7 +29,7 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(
       context, 
       MaterialPageRoute(builder: 
-      (context) => const Login(),));
+      (context) => const BuilderScreen(),));
    });
    super.initState();
   }
