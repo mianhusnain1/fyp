@@ -10,10 +10,7 @@ class ApiService {
     try {
       var response = await http.get(
         Uri.parse("https://api.openai.com/v1/models"),
-        headers: {
-          'Authorization':
-              'Bearer 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'
-        },
+        headers: {'Authorization': 'Bearer '},
       );
 
       Map jsonResponse = jsonDecode(response.body);
@@ -41,8 +38,7 @@ class ApiService {
       var response = await http.post(
         Uri.parse("https://api.openai.com/v1/chat/completions"),
         headers: {
-          'Authorization':
-              'Bearer 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',
+          'Authorization': 'Bearer ',
           "Content-Type": "application/json"
         },
         body: jsonEncode(
