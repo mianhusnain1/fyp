@@ -160,7 +160,7 @@ class _LoginState extends State<Login> {
                                       password: passwordcontroller.text)
                                   .then((value) => Navigator.of(context)
                                       .pushNamedAndRemoveUntil(
-                                          homeroute, (route) => false));
+                                          userDecider, (route) => false));
                               Navigator.of(context).pop();
                             } on FirebaseAuthException catch (e) {
                               Navigator.of(context).pop();

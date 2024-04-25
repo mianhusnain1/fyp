@@ -1,3 +1,4 @@
+import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
 import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,13 @@ class _PatientHomeState extends State<PatientHome> {
               height: 12,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AiChatScreen(),
+                    ));
+              },
               child: Container(
                 height: MediaQuery.of(context).size.height * .1,
                 width: MediaQuery.of(context).size.width - 40,
@@ -50,18 +57,16 @@ class _PatientHomeState extends State<PatientHome> {
                 child: Row(
                   children: [
                     Container(
-                      height: 60,
-                      width: 60,
-                      decoration: const BoxDecoration(
-                        color: darkColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.video_call,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    ),
+                        height: 60,
+                        width: 60,
+                        padding: const EdgeInsets.all(7),
+                        decoration: const BoxDecoration(
+                          color: darkColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Image.asset("assets/imgs/ai.webp"),
+                        )),
                     const SizedBox(
                       width: 18,
                     ),

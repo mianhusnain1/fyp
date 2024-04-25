@@ -11,6 +11,10 @@ import 'package:doctor/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+
+import 'ai assistance/providers/chats_provider.dart';
+import 'ai assistance/providers/models_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,27 +31,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-          titleTextStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-          centerTitle: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ModelsProvider(),
         ),
-        useMaterial3: true,
+        ChangeNotifierProvider(
+          create: (_) => ChatProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(
+              color: Colors.white,
+            ),
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+            centerTitle: true,
+          ),
+          useMaterial3: true,
+        ),
+        routes: {
+          loginroute: (context) => const Login(),
+          homeroute: (context) => const PatientHome(),
+          userDecider: (context) => const UserDeciderScreen(),
+        },
+        home: const Splash(),
       ),
-      routes: {
-        loginroute: (context) => const Login(),
-        homeroute: (context) => const PatientHome(),
-      },
-      home: const Splash(),
     );
   }
 }
@@ -115,8 +130,10 @@ class _UserDeciderScreenState extends State<UserDeciderScreen> {
           case ConnectionState.done:
             final role = snapshot.data;
             if (role == "patient" && role != null) {
+              print("my role is === $role");
               return const PatientHome();
             } else if (role == "doctor" && role != null) {
+              print("my role is === $role");
               return const DoctorHomeScreen();
             } else {
               return const Login();
