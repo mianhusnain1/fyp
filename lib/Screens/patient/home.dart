@@ -74,7 +74,7 @@ class _PatientHomeState extends State<PatientHome> {
             ),
             const SizedBox(
               child: Text(
-                "How are you feelings?",
+                "How are you feeling?",
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
