@@ -63,7 +63,7 @@ class _PatientHomeState extends State<PatientHome> {
                 }
                 // Handle error case
                 return const Text(
-                  "Hi, Guests",
+                  "Hi, Guest",
                   style: TextStyle(
                     fontSize: 20,
                     color: darkColor,
@@ -74,7 +74,7 @@ class _PatientHomeState extends State<PatientHome> {
             ),
             const SizedBox(
               child: Text(
-                "How are you feeling?",
+                "How are you feelings?",
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
