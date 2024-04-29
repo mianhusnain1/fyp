@@ -63,7 +63,7 @@ class _PatientHomeState extends State<PatientHome> {
                 }
                 // Handle error case
                 return const Text(
-                  "Hi, Guest",
+                  "Hi, Guests",
                   style: TextStyle(
                     fontSize: 20,
                     color: darkColor,
