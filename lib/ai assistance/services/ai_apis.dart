@@ -82,7 +82,7 @@ class ApiService {
         Uri.parse("https://api.openai.com/v1/completions"),
         headers: {
           'Authorization':
-              'Bearer sk-proj-F5D1yTFYAyvUIiBjdSTiT3BlbkFJVppqrcqjAaAQrAw1PwZQ',
+              'Bearer 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',
           "Content-Type": "application/json"
         },
         body: jsonEncode(
