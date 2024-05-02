@@ -15,7 +15,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkColor,
-        title: const Text("Doctor Homeq"),
+        title: const Text("Doctor Home"),
         actions: [
           IconButton(
               onPressed: () {
@@ -23,6 +23,25 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
               },
               icon: const Icon(Icons.logout))
         ],
+      ),
+      body: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width - 25,
+          child: ListView(
+            children: const [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Hi, Doctor",
+                style: TextStyle(
+                  color: darkColor,
+                  fontSize: 25,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -51,7 +51,7 @@ class _PatientHomeState extends State<PatientHome> {
             ),
             SizedBox(
               child: Text(
-                _user != null ? "Hi, ${_user!.displayName}" : "Hi, Name",
+                _user != null ? "Hi, ${_user!.email}" : "Hi, Name",
                 style: const TextStyle(
                     fontSize: 20,
                     color: darkColor,
@@ -155,8 +155,22 @@ class _PatientHomeState extends State<PatientHome> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
-            const SizedBox(
-              child: NearbyDoctors(),
+            Container(
+              height: 100,
+              // width: double
+              //     .infinity, // Ensure the container fills the available width
+              decoration: BoxDecoration(
+                color: darkColor,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: darkColor),
+                image: const DecorationImage(
+                  image: AssetImage("assets/imgs/google-maps.webp"),
+                  fit: BoxFit
+                      .cover, // Ensure the image covers the entire container
+                  alignment:
+                      Alignment.center, // Center the image within the container
+                ),
+              ),
             )
           ]),
         ),
