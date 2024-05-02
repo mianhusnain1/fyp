@@ -15,7 +15,7 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkColor,
-        title: const Text("Doctor Home"),
+        title: const Text("Doctor Homeq"),
         actions: [
           IconButton(
               onPressed: () {

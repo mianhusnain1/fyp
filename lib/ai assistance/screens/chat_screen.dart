@@ -94,7 +94,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                                           Navigator.of(context).pop();
                                         },
                                         child: const Text(
-                                          'Cencel',
+                                          'Cancel',
                                           style: TextStyle(
                                             color: darkColor,
                                           ),
