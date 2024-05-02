@@ -4,6 +4,7 @@ import 'package:doctor/widgets/health_needs.dart';
 import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -24,50 +25,49 @@ class _PatientHomeState extends State<PatientHome> {
         backgroundColor: darkColor,
       ),
       backgroundColor: Colors.white,
-      body: ListView(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 22
-          .0),
-          child: const Column(
-            // qst Column
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
+      body: Center(
+        child: SizedBox(
+          height: double.infinity,
+          width: MediaQuery.of(context).size.width - 35,
+          child: ListView(children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const SizedBox(
+              child: Text(
+                "Hi, Name",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: darkColor,
+                    fontWeight: FontWeight.bold),
               ),
-              SizedBox(
-                child: Text(
-                  "Hi, Name",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: darkColor,
-                      fontWeight: FontWeight.bold),
-                ),
+            ),
+            const SizedBox(
+              child: Text(
+                "How are you feeling?",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: darkColor),
+                textAlign: TextAlign.start,
               ),
-              SizedBox(
-                child: Text(
-                  "How are you feeling?",
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: darkColor),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Column(
-          children: [
-            SizedBox(
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
               height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width - 30,
+              width: MediaQuery.of(context).size.width - 40,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: darkColor)),
               child: const TextField(
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),
+                  prefixIconColor: darkColor,
                   hintText: "Search any thing",
+                  hintStyle: TextStyle(color: darkColor),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(top: 12),
                 ),
               ),
             ),
@@ -119,18 +119,44 @@ class _PatientHomeState extends State<PatientHome> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            const SizedBox(
+              child: Text("Health Needs",
+                  style: TextStyle(
+                      color: darkColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
             const SizedBox(child: HealthNeeds())
-          ],
-        )
-      ]),
-      // bottomNavigationBar:
-      //     BottomNavigationBar(type: BottomNavigationBarType.fixed, items: [
-      //   BottomNavigationBarItem(
-      //     icon: Icon(Icons.home_outlined),
-      //     activeIcon: Icon(Icons.home),
-      //     label: "Home",
-      //   )
-      // ]),
+          ]),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.edit_calendar_outlined),
+              activeIcon: Icon(Icons.edit_calendar),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat_bubble_outline),
+              activeIcon: Icon(Icons.chat_bubble),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              activeIcon: Icon(Icons.person),
+              label: "Home",
+            ),
+          ]),
     );
   }
 }

@@ -27,7 +27,7 @@ class HealthNeeds extends StatelessWidget {
     ];
 
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
+      padding: const EdgeInsets.only(top: 9.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(customIcons.length, (index) {
