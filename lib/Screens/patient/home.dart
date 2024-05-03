@@ -1,5 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor/Screens/appointment.dart';
+import 'package:doctor/Screens/done.dart';
 import 'package:doctor/Screens/patient/doctor.dart';
 import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
 import 'package:doctor/widgets/health_needs.dart';
@@ -95,15 +96,21 @@ class _PatientHomeState extends State<PatientHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AiChatScreen(),
-                    ));
+                        builder: (context) => const Form(child: Text("data"))));
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * .1,
                 width: MediaQuery.of(context).size.width - 40,
                 padding: const EdgeInsets.only(left: 14),
                 decoration: BoxDecoration(
-                  color: lightColor.withOpacity(0.2),
+                  color: lightColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade400,
+                      blurRadius: 4,
+                      offset: const Offset(1, 1),
+                    )
+                  ],
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: darkColor),
                 ),
@@ -128,7 +135,7 @@ class _PatientHomeState extends State<PatientHome> {
                       style: TextStyle(
                         color: darkColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -155,20 +162,27 @@ class _PatientHomeState extends State<PatientHome> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
-            Container(
-              height: 100,
-              // width: double
-              //     .infinity, // Ensure the container fills the available width
-              decoration: BoxDecoration(
-                color: darkColor,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: darkColor),
-                image: const DecorationImage(
-                  image: AssetImage("assets/imgs/google-maps.webp"),
-                  fit: BoxFit
-                      .cover, // Ensure the image covers the entire container
-                  alignment:
-                      Alignment.center, // Center the image within the container
+            InkWell(
+              onTap: () {},
+              child: Container(
+                height: 100,
+                // width: double
+                //     .infinity, // Ensure the container fills the available width
+                decoration: BoxDecoration(
+                  color: darkColor,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: darkColor),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey, blurRadius: 4, offset: Offset(1, 1))
+                  ],
+                  image: const DecorationImage(
+                    image: AssetImage("assets/imgs/google-maps.webp"),
+                    fit: BoxFit
+                        .cover, // Ensure the image covers the entire container
+                    alignment: Alignment
+                        .center, // Center the image within the container
+                  ),
                 ),
               ),
             )
@@ -196,8 +210,8 @@ class BottomNavigation extends StatelessWidget {
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.edit_calendar_outlined),
-          activeIcon: Icon(Icons.edit_calendar),
+          icon: Icon(Icons.calendar_month),
+          activeIcon: Icon(Icons.calendar_month),
           label: "Appointments",
         ),
         BottomNavigationBarItem(
@@ -206,9 +220,9 @@ class BottomNavigation extends StatelessWidget {
           label: "Chat",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          activeIcon: Icon(Icons.person),
-          label: "Person",
+          icon: Icon(Icons.call_end_outlined),
+          activeIcon: Icon(Icons.call_end),
+          label: "Helpline",
         ),
       ],
       onTap: (index) {
@@ -228,10 +242,8 @@ class BottomNavigation extends StatelessWidget {
         }
         switch (index) {
           case 2:
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => const AiChatScreen())));
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const Appointment())));
             break;
         }
       },
