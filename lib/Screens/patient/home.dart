@@ -1,15 +1,13 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor/Screens/appointment.dart';
-import 'package:doctor/Screens/done.dart';
-import 'package:doctor/Screens/patient/doctor.dart';
 import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
+import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/widgets/health_needs.dart';
 import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class PatientHome extends StatefulWidget {
   const PatientHome({super.key});
@@ -19,18 +17,17 @@ class PatientHome extends StatefulWidget {
 }
 
 class _PatientHomeState extends State<PatientHome> {
-  User? _user;
-  @override
-  void initState() {
-    super.initState();
-    _getCurrentUser();
-  }
-
-  Future<void> _getCurrentUser() async {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    setState(() {
-      _user = currentUser;
-    });
+  final user = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<String> getUser() async {
+    try {
+      final snapshot = await firestore.collection("users").doc(user!.uid).get();
+      final name = snapshot.data()?["name"];
+      return name;
+    } catch (e) {
+      print(e);
+      return e.toString();
+    }
   }
 
   @override
@@ -50,14 +47,31 @@ class _PatientHomeState extends State<PatientHome> {
             const SizedBox(
               height: 10,
             ),
-            SizedBox(
-              child: Text(
-                _user != null ? "Hi, ${_user!.email}" : "Hi, Name",
-                style: const TextStyle(
+            const SizedBox(height: 10),
+            FutureBuilder<String>(
+              future: getUser(), // Calls getUser() asynchronously
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {}
+                if (snapshot.hasData) {
+                  return Text(
+                    "Hi, ${snapshot.data}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: darkColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                }
+                // Handle error case
+                return const Text(
+                  "Hi, Guest",
+                  style: TextStyle(
                     fontSize: 20,
                     color: darkColor,
-                    fontWeight: FontWeight.bold),
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
             const SizedBox(
               child: Text(
@@ -93,10 +107,7 @@ class _PatientHomeState extends State<PatientHome> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Form(child: Text("data"))));
+                Get.to(() => AiChatScreen());
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * .1,
@@ -220,7 +231,9 @@ class BottomNavigation extends StatelessWidget {
           label: "Chat",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.call_end_outlined),
+          icon: Icon(
+            Icons.call_end_outlined,
+          ),
           activeIcon: Icon(Icons.call_end),
           label: "Helpline",
         ),
@@ -242,9 +255,18 @@ class BottomNavigation extends StatelessWidget {
         }
         switch (index) {
           case 2:
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const Appointment())));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => const AiChatScreen())));
             break;
+        }
+        switch (index) {
+          case 3:
+            Dialogs().errorDialog(context, "Call Us",
+                "          +92 316 1404158\n We are available 9am to 7pm.", () {
+              Navigator.of(context).pop();
+            });
         }
       },
     );
