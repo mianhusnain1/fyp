@@ -51,7 +51,6 @@ class _PatientHomeState extends State<PatientHome> {
             FutureBuilder<String>(
               future: getUser(), // Calls getUser() asynchronously
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {}
                 if (snapshot.hasData) {
                   return Text(
                     "Hi, ${snapshot.data}",
