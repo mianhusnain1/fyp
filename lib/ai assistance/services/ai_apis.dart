@@ -80,13 +80,8 @@ class ApiService {
     try {
       var response = await http.post(
         Uri.parse(""
-            // "https://api.openai.com/v1/completions"
-            ),
-        // headers: {
-        //   'Authorization':
-        //       'Bearer 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',
-        //   "Content-Type": "application/json"
-        // },
+            "https://api.openai.com/v1/completions"),
+        headers: {"Content-Type": "application/json"},
         body: jsonEncode(
           {
             "model": modelId,
