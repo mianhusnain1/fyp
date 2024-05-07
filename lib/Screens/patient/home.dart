@@ -67,7 +67,7 @@ class _PatientHomeState extends State<PatientHome> {
       body: Center(
         child: SizedBox(
           height: double.infinity,
-          width: MediaQuery.of(context).size.width - 35,
+          width: MediaQuery.of(context).size.width - 25,
           child: ListView(physics: const BouncingScrollPhysics(), children: [
             const SizedBox(
               height: 10,
