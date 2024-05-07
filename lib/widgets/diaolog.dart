@@ -1,4 +1,4 @@
-// import 'package:doctor/main.dart';
+import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
 class Dialogs {
@@ -13,67 +13,76 @@ class Dialogs {
     );
   }
 
-  static Future<void> showAlertDialog(
-      BuildContext context, String title, String msg) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 25,
-                right: 20,
-                bottom: 12,
-              ),
-              child: Text(
-                msg,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            const CircularProgressIndicator(),
-          ],
-        ),
-      ),
-    );
-  }
+  // static Future<void> showAlertDialog(
+  //     BuildContext context, String title, String msg) {
+  //   return showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Text(title),
+  //       content: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         children: [
+  //           Padding(
+  //             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  //             child: Text(
+  //               msg,
+  //               style: TextStyle(
+  //                 fontSize: 16,
+  //               ),
+  //             ),
+  //           ),
+  //           SizedBox(height: 20),
+  //           CircularProgressIndicator(),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Future<void> errorDialog(
       BuildContext context, String title, String massage, VoidCallback btn1) {
     return showDialog(
       context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(title),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 25,
-              right: 20,
-              bottom: 12,
-            ),
-            child: Text(
-              massage,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
+      builder: (context) => AlertDialog(
+          title: Text(
+            title,
+            style: const TextStyle(color: darkColor),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              InkWell(
-                  hoverColor: Colors.blue,
-                  focusColor: Colors.red,
-                  onTap: btn1,
-                  child: const Text("Close")),
-              InkWell(onTap: () {}, child: const Text("Got It"))
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                child: Text(
+                  massage,
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    onPressed: btn1,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(darkColor),
+                    ),
+                    child: const Text("Close",
+                        style: TextStyle(color: Colors.white, fontSize: 14)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Got It",
+                        style: TextStyle(color: darkColor, fontSize: 14)),
+                  ),
+                ],
+              ),
             ],
-          ),
-        ],
-      ),
+          )),
     );
   }
 }

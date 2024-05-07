@@ -83,7 +83,8 @@ class ApiService {
       {required String message, required String modelId}) async {
     try {
       var response = await http.post(
-        Uri.parse("https://api.openai.com/v1/completions"),
+        Uri.parse(""
+            "https://api.openai.com/v1/completions"),
         headers: {
           'Authorization':
               'Bearer sk-proj-GxzIGNZwRNdBMDqh5aFhT3BlbkFJpNR9ygjlNHLDB56gp83r',

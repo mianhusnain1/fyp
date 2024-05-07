@@ -277,32 +277,32 @@ class _AiChatScreenState extends State<AiChatScreen> {
       );
       return;
     }
-    try {
-      String msg = textEditingController.text;
-      setState(() {
-        _isTyping = true;
-        chatProvider.addUserMessage(msg: msg);
-        textEditingController.clear();
-        focusNode.unfocus();
-      });
-      await chatProvider.sendMessageAndGetAnswers(
-        msg: msg,
-        chosenModelId: modelsProvider.getCurrentModel,
-      );
-      setState(() {});
-    } catch (error) {
-      log("Server error please try again leter");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-          error.toString(),
-        ),
-        backgroundColor: darkColor,
-      ));
-    } finally {
-      setState(() {
-        scrollListToEND();
-        _isTyping = false;
-      });
-    }
+    // try {
+    //   String msg = textEditingController.text;
+    //   setState(() {
+    //     _isTyping = true;
+    //     chatProvider.addUserMessage(msg: msg);
+    //     textEditingController.clear();
+    //     focusNode.unfocus();
+    //   });
+    //   await chatProvider.sendMessageAndGetAnswers(
+    //     msg: msg,
+    //     chosenModelId: modelsProvider.getCurrentModel,
+    //   );
+    //   setState(() {});
+    // } catch (error) {
+    //   log("Server error please try again leter");
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text(
+    //       error.toString(),
+    //     ),
+    //     backgroundColor: darkColor,
+    //   ));
+    // } finally {
+    //   setState(() {
+    //     scrollListToEND();
+    //     _isTyping = false;
+    //   });
+    // }
   }
 }
