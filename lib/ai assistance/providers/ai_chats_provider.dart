@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-import '../models/chat_model.dart';
+import '../models/ai_chat_model.dart';
 import '../services/ai_apis.dart';
 
 class AiChatProvider with ChangeNotifier {
-  List<ChatModel> chatList = [];
-  List<ChatModel> get getChatList {
+  List<AiChatModel> chatList = [];
+  List<AiChatModel> get getChatList {
     return chatList;
   }
 
   void addUserMessage({required String msg}) {
-    chatList.add(ChatModel(msg: msg, chatIndex: 0));
+    chatList.add(AiChatModel(msg: msg, chatIndex: 0));
     notifyListeners();
   }
 

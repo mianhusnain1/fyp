@@ -8,10 +8,11 @@ class Appointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Appointments"),
-          backgroundColor: darkColor,
-        ),
-        bottomNavigationBar: BottomNavigation());
+      appBar: AppBar(
+        title: const Text("Profile"),
+        backgroundColor: darkColor,
+      ),
+      bottomNavigationBar: const BottomNavigation(),
+    );
   }
 }

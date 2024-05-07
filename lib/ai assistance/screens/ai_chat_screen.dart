@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import '../providers/chats_provider.dart';
-import '../providers/models_provider.dart';
+import '../providers/ai_chats_provider.dart';
+import '../providers/ai_models_provider.dart';
 import '../widgets/chat_widget.dart';
 
 class AiChatScreen extends StatefulWidget {
@@ -134,7 +134,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                           ),
                         );
                       },
-                      child: ChatWidget(
+                      child: AiChatWidget(
                         msg: chatProvider.getChatList[index].msg,
                         chatIndex: chatProvider.getChatList[index].chatIndex,
                         shouldAnimate:

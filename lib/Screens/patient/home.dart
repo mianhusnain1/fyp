@@ -1,13 +1,26 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor/Screens/appointment.dart';
-import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
+import 'package:doctor/Screens/patient/profile/profile.dart';
+import 'package:doctor/Screens/patient/all_catagory.dart';
+import 'package:doctor/Screens/patient/chat_screen.dart';
+import 'package:doctor/ai%20assistance/screens/ai_chat_screen.dart';
+import 'package:doctor/widgets/catagory_result.dart';
+import 'package:doctor/widgets/catagory_widget.dart';
 import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/widgets/health_needs.dart';
 import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+class Specialization {
+  final String name;
+  final String image;
+
+  Specialization({required this.name, required this.image});
+}
 
 class PatientHome extends StatefulWidget {
   const PatientHome({super.key});
@@ -17,6 +30,18 @@ class PatientHome extends StatefulWidget {
 }
 
 class _PatientHomeState extends State<PatientHome> {
+// Step 2: Create a list of specializations with name and image
+  final List<Specialization> specializations = [
+    Specialization(name: "Cardiologist", image: "assets/cardiologist.png"),
+    Specialization(name: "Orthopedic", image: "assets/orthopedic.png"),
+    Specialization(name: "Neurosurgeon", image: "assets/neurosurgeon.png"),
+    Specialization(
+        name: "General Physician", image: "assets/general_physician.png"),
+    Specialization(name: "Dantist", image: "assets/general_physician.png"),
+    Specialization(name: "Phrmacy", image: "assets/general_physician.png"),
+  ];
+
+  bool _isSearching = false;
   final user = FirebaseAuth.instance.currentUser;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<String> getUser() async {
@@ -72,45 +97,55 @@ class _PatientHomeState extends State<PatientHome> {
                 );
               },
             ),
-            const SizedBox(
-              child: Text(
-                "How are you feeling?",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    color: darkColor),
-                textAlign: TextAlign.start,
+            SizedBox(
+              height: 30,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _isSearching
+                      ? const Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search by catagory...",
+                                contentPadding: EdgeInsets.only(top: -12)),
+                          ),
+                        )
+                      : const Text(
+                          "How are you feeling?",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: darkColor),
+                          textAlign: TextAlign.start,
+                        ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isSearching = !_isSearching;
+                      });
+                    },
+                    icon: _isSearching
+                        ? const Icon(CupertinoIcons.clear_circled_solid)
+                        : const Icon(Icons.search),
+                  )
+                ],
               ),
             ),
             const SizedBox(
-              height: 5,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width - 40,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: darkColor)),
-              child: const TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  prefixIconColor: darkColor,
-                  hintText: "Search any thing",
-                  hintStyle: TextStyle(color: darkColor),
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 12,
+              height: 15,
             ),
             InkWell(
               onTap: () {
-                Get.to(() => AiChatScreen());
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AiChatScreen(),
+                    ));
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * .1,
-                width: MediaQuery.of(context).size.width - 40,
+                width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 14),
                 decoration: BoxDecoration(
                   color: lightColor,
@@ -153,7 +188,70 @@ class _PatientHomeState extends State<PatientHome> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 14,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Browse by catagory",
+                  style: TextStyle(
+                    color: darkColor,
+                    letterSpacing: .5,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AllCatagoryScreen(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        color: Colors.orangeAccent.shade700,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 14,
+            ),
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: specializations.length,
+                itemBuilder: (context, index) {
+                  final catagory = specializations[index];
+                  return CatagoryWidget(
+                    name: catagory.name,
+                    image: "assets/imgs/doctor.png",
+                    ontap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CatagoryResult(catagory: catagory.name),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 14,
             ),
             const SizedBox(
               child: Text("Health Needs",
@@ -220,14 +318,14 @@ class BottomNavigation extends StatelessWidget {
           label: "Home",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-          activeIcon: Icon(Icons.calendar_month),
-          label: "Appointments",
+          icon: Icon(Icons.person),
+          activeIcon: Icon(Icons.person),
+          label: "Profile",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat_bubble_outline),
           activeIcon: Icon(Icons.chat_bubble),
-          label: "Chat",
+          label: "Inbox",
         ),
         BottomNavigationBarItem(
           icon: Icon(
@@ -257,7 +355,7 @@ class BottomNavigation extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: ((context) => const AiChatScreen())));
+                    builder: ((context) => const PatientChatScreen())));
             break;
         }
         switch (index) {

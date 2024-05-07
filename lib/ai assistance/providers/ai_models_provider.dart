@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../models/models_model.dart';
+import '../models/ai_models_model.dart';
 import '../services/ai_apis.dart';
 
 class AIModelsProvider with ChangeNotifier {
@@ -14,13 +14,13 @@ class AIModelsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<ModelsModel> modelsList = [];
+  List<AiModelsModel> modelsList = [];
 
-  List<ModelsModel> get getModelsList {
+  List<AiModelsModel> get getModelsList {
     return modelsList;
   }
 
-  Future<List<ModelsModel>> getAllModels() async {
+  Future<List<AiModelsModel>> getAllModels() async {
     modelsList = await ApiService.getModels();
     return modelsList;
   }
