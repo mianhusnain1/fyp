@@ -18,7 +18,7 @@ class AiChatScreen extends StatefulWidget {
 
 class _AiChatScreenState extends State<AiChatScreen> {
   bool _isTyping = false;
-  List<ChatProvider> chatList = [];
+  List<AiChatProvider> chatList = [];
   late TextEditingController textEditingController;
   late ScrollController _listScrollController;
   late FocusNode focusNode;
@@ -41,8 +41,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final modelsProvider = Provider.of<ModelsProvider>(context);
-    final chatProvider = Provider.of<ChatProvider>(context);
+    final modelsProvider = Provider.of<AIModelsProvider>(context);
+    final chatProvider = Provider.of<AiChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkColor,
@@ -253,8 +253,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
   }
 
   Future<void> sendMessageFCT(
-      {required ModelsProvider modelsProvider,
-      required ChatProvider chatProvider}) async {
+      {required AIModelsProvider modelsProvider,
+      required AiChatProvider chatProvider}) async {
     if (_isTyping) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

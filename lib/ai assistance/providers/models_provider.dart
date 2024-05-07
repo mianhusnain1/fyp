@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import '../models/models_model.dart';
 import '../services/ai_apis.dart';
 
-class ModelsProvider with ChangeNotifier {
+class AIModelsProvider with ChangeNotifier {
   String currentModel = "gpt-3.5-turbo-0301";
 
   String get getCurrentModel {

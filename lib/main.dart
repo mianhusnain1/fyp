@@ -12,7 +12,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
 import 'ai assistance/providers/chats_provider.dart';
 import 'ai assistance/providers/models_provider.dart';
 
@@ -34,10 +33,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => ModelsProvider(),
+          create: (_) => AIModelsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ChatProvider(),
+          create: (_) => AiChatProvider(),
         ),
       ],
       child: MaterialApp(
