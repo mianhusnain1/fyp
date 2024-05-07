@@ -53,7 +53,7 @@ class _PatientHomeState extends State<PatientHome> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(
-                    "Hi, ${snapshot.data}",
+                    "Hi, ${snapshot.data!.toUpperCase()}",
                     style: const TextStyle(
                       fontSize: 20,
                       color: darkColor,
