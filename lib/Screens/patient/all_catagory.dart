@@ -12,13 +12,12 @@ class AllCatagoryScreen extends StatefulWidget {
 
 class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
   final List<Specialization> specializations = [
-    Specialization(name: "Cardiologist", image: "assets/cardiologist.png"),
-    Specialization(name: "Orthopedic", image: "assets/orthopedic.png"),
-    Specialization(name: "Neurosurgeon", image: "assets/neurosurgeon.png"),
-    Specialization(
-        name: "General Physician", image: "assets/general_physician.png"),
-    Specialization(name: "Dantist", image: "assets/general_physician.png"),
-    Specialization(name: "Phrmacy", image: "assets/general_physician.png"),
+    Specialization(name: "Cardiologist", image: "assets/imgs/heart.png"),
+    Specialization(name: "Orthopedic", image: "assets/imgs/bones.png"),
+    Specialization(name: "Neurosurgeon", image: "assets/imgs/brainstorm.png"),
+    Specialization(name: "Urologist", image: "assets/imgs/skin.png"),
+    Specialization(name: "Dentist", image: "assets/imgs/tooth-medicine.png"),
+    Specialization(name: "Pathology", image: "assets/imgs/kidney.png"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "assets/imgs/doctor.png",
+                      specialization.image,
                       width: 70,
                       height: 70,
                       fit: BoxFit.cover,

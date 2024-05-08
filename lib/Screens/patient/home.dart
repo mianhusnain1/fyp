@@ -13,6 +13,7 @@ import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Specialization {
@@ -32,13 +33,12 @@ class PatientHome extends StatefulWidget {
 class _PatientHomeState extends State<PatientHome> {
 // Step 2: Create a list of specializations with name and image
   final List<Specialization> specializations = [
-    Specialization(name: "Cardiologist", image: "assets/cardiologist.png"),
-    Specialization(name: "Orthopedic", image: "assets/orthopedic.png"),
-    Specialization(name: "Neurosurgeon", image: "assets/neurosurgeon.png"),
-    Specialization(
-        name: "General Physician", image: "assets/general_physician.png"),
-    Specialization(name: "Dantist", image: "assets/general_physician.png"),
-    Specialization(name: "Phrmacy", image: "assets/general_physician.png"),
+    Specialization(name: "Cardiologist", image: "assets/imgs/heart.png"),
+    Specialization(name: "Orthopedic", image: "assets/imgs/bones.png"),
+    Specialization(name: "Neurosurgeon", image: "assets/imgs/brainstorm.png"),
+    Specialization(name: "Urologist", image: "assets/imgs/skin.png"),
+    Specialization(name: "Dentist", image: "assets/imgs/tooth-medicine.png"),
+    Specialization(name: "Pathology", image: "assets/imgs/kidney.png"),
   ];
 
   bool _isSearching = false;
@@ -236,7 +236,7 @@ class _PatientHomeState extends State<PatientHome> {
                   final catagory = specializations[index];
                   return CatagoryWidget(
                     name: catagory.name,
-                    image: "assets/imgs/doctor.png",
+                    image: catagory.image,
                     ontap: () {
                       Navigator.push(
                         context,
