@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor/Screens/appointment.dart';
+import 'package:doctor/Screens/patient/categories.dart';
 import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
 import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/widgets/health_needs.dart';
@@ -43,7 +44,7 @@ class _PatientHomeState extends State<PatientHome> {
         child: SizedBox(
           height: double.infinity,
           width: MediaQuery.of(context).size.width - 35,
-          child: ListView(physics: const BouncingScrollPhysics(), children: [
+          child: ListView(children: [
             const SizedBox(
               height: 10,
             ),
@@ -195,7 +196,7 @@ class _PatientHomeState extends State<PatientHome> {
                   ),
                 ),
               ),
-            )
+            ),
           ]),
         ),
       ),
