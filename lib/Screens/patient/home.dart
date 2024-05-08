@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor/Screens/appointment.dart';
-import 'package:doctor/Screens/patient/categories.dart';
 import 'package:doctor/ai%20assistance/screens/chat_screen.dart';
 import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/widgets/health_needs.dart';

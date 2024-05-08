@@ -1,12 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:developer';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import '../providers/chats_provider.dart';
-import '../providers/models_provider.dart';
+import '../providers/ai_chats_provider.dart';
+import '../providers/ai_models_provider.dart';
 import '../widgets/chat_widget.dart';
 
 class AiChatScreen extends StatefulWidget {
@@ -18,7 +17,7 @@ class AiChatScreen extends StatefulWidget {
 
 class _AiChatScreenState extends State<AiChatScreen> {
   bool _isTyping = false;
-  List<ChatProvider> chatList = [];
+  List<AiChatProvider> chatList = [];
   late TextEditingController textEditingController;
   late ScrollController _listScrollController;
   late FocusNode focusNode;
@@ -41,8 +40,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final modelsProvider = Provider.of<ModelsProvider>(context);
-    final chatProvider = Provider.of<ChatProvider>(context);
+    final modelsProvider = Provider.of<AIModelsProvider>(context);
+    final chatProvider = Provider.of<AiChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkColor,
@@ -135,7 +134,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                           ),
                         );
                       },
-                      child: ChatWidget(
+                      child: AiChatWidget(
                         msg: chatProvider.getChatList[index].msg,
                         chatIndex: chatProvider.getChatList[index].chatIndex,
                         shouldAnimate:
@@ -253,8 +252,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
   }
 
   Future<void> sendMessageFCT(
-      {required ModelsProvider modelsProvider,
-      required ChatProvider chatProvider}) async {
+      {required AIModelsProvider modelsProvider,
+      required AiChatProvider chatProvider}) async {
     if (_isTyping) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

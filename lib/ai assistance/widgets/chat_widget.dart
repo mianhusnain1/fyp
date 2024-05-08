@@ -2,8 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
-class ChatWidget extends StatefulWidget {
-  const ChatWidget(
+class AiChatWidget extends StatefulWidget {
+  const AiChatWidget(
       {super.key,
       required this.msg,
       required this.chatIndex,
@@ -14,10 +14,10 @@ class ChatWidget extends StatefulWidget {
   final bool shouldAnimate;
 
   @override
-  State<ChatWidget> createState() => _ChatWidgetState();
+  State<AiChatWidget> createState() => _AiChatWidgetState();
 }
 
-class _ChatWidgetState extends State<ChatWidget> {
+class _AiChatWidgetState extends State<AiChatWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(

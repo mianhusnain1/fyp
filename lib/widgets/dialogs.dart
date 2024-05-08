@@ -79,7 +79,7 @@ class Dialogss {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: const Text('Error Occured'),
+        title: const Text('LogOut'),
         children: [
           const Padding(
             padding: EdgeInsets.only(left: 25, bottom: 12, right: 20),
