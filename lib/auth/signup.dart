@@ -32,7 +32,9 @@ class _SignupState extends State<Signup> {
     'Cardiologist',
     'Orthopedic',
     'Neurosurgeon',
-    'General Physician',
+    'Urologist',
+    'Dentist',
+    'Pathology',
   ];
   bool isLoading = false;
   Future<void> patientSignUp() async {
@@ -125,6 +127,7 @@ class _SignupState extends State<Signup> {
       await Services.firestore.collection("users").doc(newUser.user!.uid).set(
             pUser.toJson(),
           );
+      final time = DateTime.now().toString();
       final tUser = DoctorModel(
         name: namecontroller.text.toString(),
         id: newUser.user!.uid,
@@ -138,6 +141,9 @@ class _SignupState extends State<Signup> {
         schedule: '',
         availability: false,
         catagory: _selectedSpecialization!,
+        created_at: time,
+        wrong_id_card: false,
+        wrong_licence: false,
       );
       await Services.firestore
           .collection("doctor")

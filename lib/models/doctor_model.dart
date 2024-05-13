@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 class DoctorModel {
   late String id;
   late String name;
@@ -10,7 +12,10 @@ class DoctorModel {
   late String schedule;
   late String bio;
   late String image;
+  late String created_at;
   late bool availability;
+  late bool wrong_id_card;
+  late bool wrong_licence;
   //
   DoctorModel({
     required this.catagory,
@@ -25,6 +30,9 @@ class DoctorModel {
     required this.schedule,
     required this.image,
     required this.availability,
+    required this.created_at,
+    required this.wrong_id_card,
+    required this.wrong_licence,
   });
 
   DoctorModel.fromJson(Map<String, dynamic> json) {
@@ -40,6 +48,9 @@ class DoctorModel {
     schedule = json["schedule"] ?? "";
     image = json["image"] ?? "";
     availability = json["availability"] ?? false;
+    created_at = json["created_at"] ?? "";
+    wrong_id_card = json["wrong_id_card"] ?? false;
+    wrong_licence = json["wrong_licence"] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -56,6 +67,9 @@ class DoctorModel {
     data["schedule"] = schedule;
     data["image"] = image;
     data["availability"] = availability;
+    data["created_at"] = created_at;
+    data["wrong_id_card"] = wrong_id_card;
+    data["wrong_licence"] = wrong_licence;
     return data;
   }
 }
