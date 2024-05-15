@@ -60,7 +60,7 @@ class _PatientHomeState extends State<PatientHome> {
     return Scaffold(
       drawer: const Navbar(),
       appBar: AppBar(
-        title: const Text("Medical App2"),
+        title: const Text("HealthCare"),
         backgroundColor: darkColor,
       ),
       backgroundColor: Colors.white,
@@ -127,7 +127,7 @@ class _PatientHomeState extends State<PatientHome> {
                     },
                     icon: _isSearching
                         ? const Icon(CupertinoIcons.clear_circled_solid)
-                        : const Icon(Icons.person),
+                        : const Icon(Icons.search),
                   )
                 ],
               ),
