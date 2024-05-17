@@ -42,7 +42,7 @@ class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          CatagoryResult(catagory: specialization.name),
+                          SearchedCatagory(catagory: specialization.name),
                     ));
               },
               child: Card(

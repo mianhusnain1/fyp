@@ -241,9 +241,9 @@ class _PatientHomeState extends State<PatientHome> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              CatagoryResult(catagory: catagory.name),
-                        ),
+                            builder: (context) =>
+                                // CatagoryResult(catagory: catagory.name),
+                                SearchedCatagory(catagory: catagory.name)),
                       );
                     },
                   );
