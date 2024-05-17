@@ -60,7 +60,7 @@ class _PatientHomeState extends State<PatientHome> {
     return Scaffold(
       drawer: const Navbar(),
       appBar: AppBar(
-        title: const Text("Medical App"),
+        title: const Text("Medical App2"),
         backgroundColor: darkColor,
       ),
       backgroundColor: Colors.white,
