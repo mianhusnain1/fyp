@@ -365,11 +365,6 @@ class _SignupState extends State<Signup> {
         const SizedBox(
           height: 15,
         ),
-        SizedBox(
-          height: mq.height * 0.06,
-          width: mq.width - 40,
-          child: _inputField(confirmpassword, isPassword: true),
-        ),
         const SizedBox(
           height: 15,
         ),
@@ -512,10 +507,6 @@ class _SignupState extends State<Signup> {
         const SizedBox(
           height: 15,
         ),
-        SizedBox(
-            height: mq.height * 0.06,
-            width: mq.width - 40,
-            child: _inputField(confirmpassword, isPassword: true)),
         const SizedBox(
           height: 15,
         ),
