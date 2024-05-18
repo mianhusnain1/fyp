@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+import 'package:doctor/Screens/doctor/doctor_details.dart';
 import 'package:doctor/main.dart';
 import 'package:doctor/models/doctor_model.dart';
 import 'package:doctor/services/services.dart';
@@ -110,15 +111,13 @@ class _SearchedCatagoryState extends State<SearchedCatagory> {
                                           horizontal: 8),
                                       child: InkWell(
                                         onTap: () {
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) =>
-                                          //         ServiceProviderDetails(
-                                          //       serviceProvider: data,
-                                          //     ),
-                                          //   ),
-                                          // );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DoctorDetails(
+                                                        doctor: data)),
+                                          );
                                         },
                                         child: Card(
                                           color: Colors.grey.shade200,
