@@ -189,27 +189,6 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const SizedBox(
-                    child: Text(
-                      "Or Login With",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoginButton(
-                          img: "images/facebook.png",
-                        ),
-                        LoginButton(img: "images/Google.png"),
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -232,7 +211,34 @@ class _LoginState extends State<Login> {
                             ))
                       ],
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const SizedBox(
+                    child: Text(
+                      "By logging in, it means you are",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  const SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "agreed to our ",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          "Terms and Conditions",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: darkColor,
+                              fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             )

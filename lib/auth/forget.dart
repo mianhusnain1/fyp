@@ -49,7 +49,7 @@ class _ForgetState extends State<Forget> {
                       decoration: InputDecoration(
                           label: const Text("Email"),
                           prefixIcon: const Icon(Icons.lock),
-                          prefixIconColor: Colors.blue,
+                          prefixIconColor: darkColor,
                           hintText: "Enter Email",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),

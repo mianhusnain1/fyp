@@ -1,4 +1,3 @@
-import 'package:doctor/Screens/patient/home.dart';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class _PatientChatScreenState extends State<PatientChatScreen> {
         title: const Text("Inbox"),
         backgroundColor: darkColor,
       ),
-      bottomNavigationBar: const BottomNavigation(),
+      // bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

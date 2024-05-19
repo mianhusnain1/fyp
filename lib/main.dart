@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor/Screens/doctor/doctor_home.dart';
+import 'package:doctor/Screens/doctor/doctor_bottom_navigation.dart';
+import 'package:doctor/Screens/patient/patient_navbar.dart';
 import 'package:doctor/auth/Verify.dart';
 import 'package:doctor/Screens/patient/home.dart';
 import 'package:doctor/auth/login.dart';
@@ -130,10 +131,10 @@ class _UserDeciderScreenState extends State<UserDeciderScreen> {
             final role = snapshot.data;
             if (role == "patient" && role != null) {
               print("my role is === $role");
-              return const PatientHome();
+              return const PatientNavbar();
             } else if (role == "doctor" && role != null) {
               print("my role is === $role");
-              return const DoctorHomeScreen();
+              return const DoctorBottomBar();
             } else {
               return const Login();
             }

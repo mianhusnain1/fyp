@@ -1,4 +1,4 @@
-class ClientModel {
+class PatientModel {
   late String id;
   late String name;
   late String email;
@@ -6,7 +6,7 @@ class ClientModel {
   late String phone;
   late String address;
   late String city;
-  ClientModel({
+  PatientModel({
     required this.id,
     required this.name,
     required this.email,
@@ -16,7 +16,7 @@ class ClientModel {
     required this.city,
   });
 
-  ClientModel.fromJson(Map<String, dynamic> json) {
+  PatientModel.fromJson(Map<String, dynamic> json) {
     name = json["name"] ?? "";
     id = json["id"] ?? "";
     email = json["email"] ?? "";

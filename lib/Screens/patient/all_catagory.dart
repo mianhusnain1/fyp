@@ -23,7 +23,7 @@ class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("All Catagories"),
+        title: const Text("All Categories"),
         backgroundColor: darkColor,
       ),
       body: Padding(
@@ -42,7 +42,7 @@ class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          CatagoryResult(catagory: specialization.name),
+                          SearchedCatagory(catagory: specialization.name),
                     ));
               },
               child: Card(

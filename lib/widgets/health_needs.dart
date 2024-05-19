@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:doctor/Screens/patient/all_catagory.dart';
+import 'package:doctor/ai%20assistance/screens/ai_chat_screen.dart';
 import 'package:doctor/main.dart';
 import 'package:flutter/material.dart';
 
@@ -10,20 +12,19 @@ class HealthNeeds extends StatelessWidget {
     List<CustomIcon> customIcons = [
       CustomIcon(name: "Appointment", icon: 'assets/imgs/appointment.png'),
       CustomIcon(name: "Hospital", icon: 'assets/imgs/hospital.png'),
-      CustomIcon(name: "Covid-19", icon: 'assets/imgs/virus.png'),
+      CustomIcon(name: "Chatbot", icon: 'assets/imgs/ai.webp'),
       CustomIcon(name: "More", icon: 'assets/imgs/more.png'),
     ];
     List<CustomIcon> healthNeeds = [
       CustomIcon(name: "Appointment", icon: 'assets/imgs/appointment.png'),
       CustomIcon(name: "Hospital", icon: 'assets/imgs/hospital.png'),
-      CustomIcon(name: "Covid-19", icon: 'assets/imgs/virus.png'),
-      CustomIcon(name: "Pharmacy", icon: 'assets/imgs/drug.png'),
+      CustomIcon(name: "Chatbot", icon: 'assets/imgs/ai.webp'),
     ];
     List<CustomIcon> specialisedCared = [
-      CustomIcon(name: "Diabetes", icon: 'assets/imgs/blood.png'),
-      CustomIcon(name: "Health Care", icon: 'assets/imgs/health_care.png'),
-      CustomIcon(name: "Dental", icon: 'assets/imgs/tooth.png'),
-      CustomIcon(name: "Insured", icon: 'assets/imgs/insurance.png'),
+      CustomIcon(name: "Cardiologist", icon: "assets/imgs/heart.png"),
+      CustomIcon(name: "Orthopedic", icon: "assets/imgs/bones.png"),
+      CustomIcon(name: "Dentist", icon: "assets/imgs/tooth-medicine.png"),
+      CustomIcon(name: "Pathology", icon: "assets/imgs/kidney.png"),
     ];
 
     return Padding(
@@ -63,7 +64,27 @@ class HealthNeeds extends StatelessWidget {
                                     return Column(
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            if (index ==
+                                                healthNeeds.length - 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AiChatScreen()));
+                                            } else if (index ==
+                                                healthNeeds.length - 2) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AiChatScreen()));
+                                            } else if (index ==
+                                                healthNeeds.length - 3) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AllCatagoryScreen()));
+                                            }
+                                          },
                                           borderRadius:
                                               BorderRadius.circular(90),
                                           child: Container(
@@ -104,7 +125,27 @@ class HealthNeeds extends StatelessWidget {
                                     return Column(
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            if (index ==
+                                                specialisedCared.length - 1) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AllCatagoryScreen()));
+                                            } else if (index ==
+                                                specialisedCared.length - 2) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AllCatagoryScreen()));
+                                            } else if (index ==
+                                                specialisedCared.length - 3) {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AllCatagoryScreen()));
+                                            }
+                                          },
                                           borderRadius:
                                               BorderRadius.circular(90),
                                           child: Container(
@@ -133,6 +174,15 @@ class HealthNeeds extends StatelessWidget {
                         );
                       },
                     );
+                  } else if (index == customIcons.length - 2) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AiChatScreen()));
+                  } else if (index == customIcons.length - 3) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AllCatagoryScreen()));
+                  } else if (index == customIcons.length - 4) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AllCatagoryScreen()));
                   }
                 },
                 borderRadius: BorderRadius.circular(90),

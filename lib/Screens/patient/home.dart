@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctor/Screens/patient/profile/profile.dart';
 import 'package:doctor/Screens/patient/all_catagory.dart';
-import 'package:doctor/Screens/patient/chat_screen.dart';
+import 'package:doctor/Screens/patient/patient_drawer.dart';
 import 'package:doctor/ai%20assistance/screens/ai_chat_screen.dart';
 import 'package:doctor/widgets/catagory_result.dart';
 import 'package:doctor/widgets/catagory_widget.dart';
-import 'package:doctor/widgets/diaolog.dart';
 import 'package:doctor/widgets/health_needs.dart';
 import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
@@ -46,6 +44,7 @@ class _PatientHomeState extends State<PatientHome> {
   Future<String> getUser() async {
     try {
       final snapshot = await firestore.collection("users").doc(user!.uid).get();
+
       final name = snapshot.data()?["name"];
       return name;
     } catch (e) {
@@ -57,9 +56,9 @@ class _PatientHomeState extends State<PatientHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Navbar(),
+      drawer: PatientDrawer(),
       appBar: AppBar(
-        title: const Text("Medical App"),
+        title: const Text("HealthCare"),
         backgroundColor: darkColor,
       ),
       backgroundColor: Colors.white,
@@ -106,7 +105,7 @@ class _PatientHomeState extends State<PatientHome> {
                           child: TextField(
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "Search by catagory...",
+                                hintText: "Search by Category...",
                                 contentPadding: EdgeInsets.only(top: -12)),
                           ),
                         )
@@ -193,7 +192,7 @@ class _PatientHomeState extends State<PatientHome> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Browse by catagory",
+                  "Browse by Category",
                   style: TextStyle(
                     color: darkColor,
                     letterSpacing: .5,
@@ -240,9 +239,9 @@ class _PatientHomeState extends State<PatientHome> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              CatagoryResult(catagory: catagory.name),
-                        ),
+                            builder: (context) =>
+                                // CatagoryResult(catagory: catagory.name),
+                                SearchedCatagory(catagory: catagory.name)),
                       );
                     },
                   );
@@ -296,75 +295,75 @@ class _PatientHomeState extends State<PatientHome> {
           ]),
         ),
       ),
-      bottomNavigationBar: const BottomNavigation(),
+      // bottomNavigationBar: const BottomNavigation(),
     );
   }
 }
 
-class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({
-    super.key,
-  });
+// class BottomNavigation extends StatelessWidget {
+//   const BottomNavigation({
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          activeIcon: Icon(Icons.home),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          activeIcon: Icon(Icons.person),
-          label: "Profile",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.chat_bubble_outline),
-          activeIcon: Icon(Icons.chat_bubble),
-          label: "Inbox",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.call_end_outlined,
-          ),
-          activeIcon: Icon(Icons.call_end),
-          label: "Helpline",
-        ),
-      ],
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PatientHome()),
-            );
-            break;
-        }
-        switch (index) {
-          case 1:
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const Appointment()));
-            break;
-        }
-        switch (index) {
-          case 2:
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => const PatientChatScreen())));
-            break;
-        }
-        switch (index) {
-          case 3:
-            Dialogs().errorDialog(context, "Call Us",
-                "          +92 316 1404158\n We are available 9am to 7pm.", () {
-              Navigator.of(context).pop();
-            });
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BottomNavigationBar(
+//       type: BottomNavigationBarType.fixed,
+//       items: const [
+//         BottomNavigationBarItem(
+//           icon: Icon(Icons.home_outlined),
+//           activeIcon: Icon(Icons.home),
+//           label: "Home",
+//         ),
+//         BottomNavigationBarItem(
+//           icon: Icon(Icons.person),
+//           activeIcon: Icon(Icons.person),
+//           label: "Profile",
+//         ),
+//         BottomNavigationBarItem(
+//           icon: Icon(Icons.chat_bubble_outline),
+//           activeIcon: Icon(Icons.chat_bubble),
+//           label: "Inbox",
+//         ),
+//         BottomNavigationBarItem(
+//           icon: Icon(
+//             Icons.call_end_outlined,
+//           ),
+//           activeIcon: Icon(Icons.call_end),
+//           label: "Helpline",
+//         ),
+//       ],
+//       onTap: (index) {
+//         switch (index) {
+//           case 0:
+//             Navigator.push(
+//               context,
+//               MaterialPageRoute(builder: (context) => const PatientHome()),
+//             );
+//             break;
+//         }
+//         switch (index) {
+//           case 1:
+//             // Navigator.push(context,
+//             //     MaterialPageRoute(builder: (context) => const Patient(patient: ));
+//             break;
+//         }
+//         switch (index) {
+//           case 2:
+//             Navigator.push(
+//                 context,
+//                 MaterialPageRoute(
+//                     builder: ((context) => const PatientChatScreen())));
+//             break;
+//         }
+//         switch (index) {
+//           case 3:
+//             Dialogs().errorDialog(context, "Call Us",
+//                 "          +92 316 1404158\n We are available 9am to 7pm.", () {
+//               Navigator.of(context).pop();
+//             });
+//         }
+//       },
+//     );
+//   }
+// }
