@@ -1,6 +1,5 @@
 import 'package:doctor/Screens/patient/all_catagory.dart';
 import 'package:doctor/Screens/patient/home.dart';
-import 'package:doctor/Screens/patient/profile/patient_profile.dart';
 import 'package:doctor/ai%20assistance/screens/ai_chat_screen.dart';
 import 'package:doctor/main.dart';
 import 'package:doctor/widgets/auth_dialogs.dart';
@@ -52,31 +51,6 @@ class PatientDrawer extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: ((context) => const PatientHome())));
-                },
-              ),
-              TileWidget(
-                icon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                title: "Profile",
-                ontap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const PatientProfile()));
-                  // Navigator.of(context).pop();
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (_) => Services.me.role == "serviceProvider"
-                  //         ? ServiceProfileScreen(
-                  //             user: Services.serviceProvider,
-                  //           )
-                  //         : ClientProfileScreen(
-                  //             user: Services.client,
-                  //           ),
-                  //   ),
-                  // );
                 },
               ),
               TileWidget(

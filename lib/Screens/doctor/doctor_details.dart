@@ -1,5 +1,7 @@
+import 'package:doctor/Screens/patient/chat/patient_chat_screen.dart';
 import 'package:doctor/models/doctor_model.dart';
 import 'package:doctor/main.dart';
+import 'package:doctor/services/services.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDetails extends StatefulWidget {
@@ -306,8 +308,46 @@ class _DoctorDetailsState extends State<DoctorDetails> {
             Positioned(
               bottom: 10,
               left: MediaQuery.of(context).size.width * 0.15,
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.7,
+              child: InkWell(
+                onTap: () async {
+                  await Services.addChatUser(widget.doctor.email);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PatientChatScreen(
+                        user: widget.doctor,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: 55,
+                  decoration: BoxDecoration(
+                    color: darkColor,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: const Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "Start Chat with doctor",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 22,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
             )
           ]),

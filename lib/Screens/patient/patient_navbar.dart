@@ -1,7 +1,10 @@
-import 'package:doctor/Screens/patient/chat_screen.dart';
+// ignore_for_file: prefer_typing_uninitialized_variables
+
+import 'package:doctor/Screens/patient/chat/patient_inbox.dart';
 import 'package:doctor/Screens/patient/home.dart';
 import 'package:doctor/Screens/patient/profile/patient_profile.dart';
 import 'package:doctor/main.dart';
+import 'package:doctor/services/services.dart';
 import 'package:doctor/widgets/diaolog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +20,10 @@ class _PatientNavbarState extends State<PatientNavbar> {
   int myCurrentindex = 0;
   List pages = [
     const PatientHome(),
-    const PatientChatScreen(),
-    const PatientProfile(),
+    const PatietInbox(),
+    ClientProfileScreen(
+      user: Services.patient,
+    ),
     Dialogs()
   ];
   @override

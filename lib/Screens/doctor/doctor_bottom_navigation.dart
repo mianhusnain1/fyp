@@ -1,7 +1,8 @@
-import 'package:doctor/Screens/doctor/about_us.dart';
+import 'package:doctor/Screens/doctor/Profile/doctor_profile.dart';
+import 'package:doctor/Screens/doctor/chat/doctor_inbox.dart';
 import 'package:doctor/Screens/doctor/doctor_home.dart';
-import 'package:doctor/Screens/doctor/Profile/edit_doctor.dart';
 import 'package:doctor/main.dart';
+import 'package:doctor/services/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,13 @@ class DoctorBottomBar extends StatefulWidget {
 
 class _DoctorBottomBarState extends State<DoctorBottomBar> {
   int myCurrentindex = 0;
-  List pages = [const DoctorHomeScreen(), const EditDoctor(), Aboutus()];
+  List pages = [
+    const DoctorHomeScreen(),
+    const DoctorInbox(),
+    ServiceProfileScreen(
+      user: Services.doctor,
+    ),
+  ];
   @override
   void initState() {
     super.initState();

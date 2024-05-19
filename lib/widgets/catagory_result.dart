@@ -115,9 +115,9 @@ class _SearchedCatagoryState extends State<SearchedCatagory> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DoctorDetails(
-                                                        doctor: data)),
+                                              builder: (context) =>
+                                                  DoctorDetails(doctor: data),
+                                            ),
                                           );
                                         },
                                         child: Card(

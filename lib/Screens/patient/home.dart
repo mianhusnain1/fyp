@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor/Screens/patient/all_catagory.dart';
 import 'package:doctor/Screens/patient/patient_drawer.dart';
 import 'package:doctor/ai%20assistance/screens/ai_chat_screen.dart';
+import 'package:doctor/services/services.dart';
 import 'package:doctor/widgets/catagory_result.dart';
 import 'package:doctor/widgets/catagory_widget.dart';
 import 'package:doctor/widgets/health_needs.dart';
-import 'package:doctor/widgets/navbar.dart';
 import 'package:doctor/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,23 +38,18 @@ class _PatientHomeState extends State<PatientHome> {
 
   bool _isSearching = false;
   final user = FirebaseAuth.instance.currentUser;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Future<String> getUser() async {
-    try {
-      final snapshot = await firestore.collection("users").doc(user!.uid).get();
 
-      final name = snapshot.data()?["name"];
-      return name;
-    } catch (e) {
-      print(e);
-      return e.toString();
-    }
+  @override
+  void initState() {
+    Services.patientProfile();
+    Services.getMyProfile();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: PatientDrawer(),
+      drawer: const PatientDrawer(),
       appBar: AppBar(
         title: const Text("HealthCare"),
         backgroundColor: darkColor,
@@ -71,29 +64,13 @@ class _PatientHomeState extends State<PatientHome> {
               height: 10,
             ),
             const SizedBox(height: 10),
-            FutureBuilder<String>(
-              future: getUser(), // Calls getUser() asynchronously
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(
-                    "Hi, ${snapshot.data!.toUpperCase()}",
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: darkColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                }
-                // Handle error case
-                return const Text(
-                  "Hi, Guest",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: darkColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
+            Text(
+              "Hi, ${Services.patient.name.toUpperCase()}",
+              style: const TextStyle(
+                fontSize: 20,
+                color: darkColor,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(
               height: 30,
@@ -104,9 +81,10 @@ class _PatientHomeState extends State<PatientHome> {
                       ? const Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Search by Category...",
-                                contentPadding: EdgeInsets.only(top: -12)),
+                              border: InputBorder.none,
+                              hintText: "Search by Category...",
+                              contentPadding: EdgeInsets.only(top: -12),
+                            ),
                           ),
                         )
                       : const Text(
