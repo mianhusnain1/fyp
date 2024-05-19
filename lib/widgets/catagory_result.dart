@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print
+
 import 'package:doctor/Screens/doctor/doctor_details.dart';
 import 'package:doctor/main.dart';
 import 'package:doctor/models/doctor_model.dart';

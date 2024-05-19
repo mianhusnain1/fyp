@@ -3,12 +3,14 @@ class UserModel {
   late String name;
   late String email;
   late String role;
+  late String created_at;
 
   UserModel({
     required this.id,
     required this.name,
     required this.email,
     required this.role,
+    required this.created_at,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +18,7 @@ class UserModel {
     name = json["name"];
     email = json["email"];
     role = json["role"];
+    created_at = json["created_at"];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +27,7 @@ class UserModel {
     data['name'] = name;
     data['email'] = email;
     data['role'] = role;
+    data['created_at'] = created_at;
     return data;
   }
 }

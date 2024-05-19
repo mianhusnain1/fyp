@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, non_constant_identifier_names
 
 import 'package:doctor/auth/Verify.dart';
-import 'package:doctor/models/client_model.dart';
+import 'package:doctor/models/patient_model.dart';
 import 'package:doctor/models/doctor_model.dart';
 import 'package:doctor/widgets/dialogs.dart';
 import 'package:doctor/auth/login.dart';
@@ -45,15 +45,15 @@ class _SignupState extends State<Signup> {
         password: passwordcontroller.text.toString(),
       );
       final pUser = UserModel(
-        name: namecontroller.text.toString(),
-        id: newUser.user!.uid,
-        email: emailcontroller.text.toString(),
-        role: userType,
-      );
+          name: namecontroller.text.toString(),
+          id: newUser.user!.uid,
+          email: emailcontroller.text.toString(),
+          role: userType,
+          created_at: "");
       await Services.firestore.collection("users").doc(newUser.user!.uid).set(
             pUser.toJson(),
           );
-      final tUser = ClientModel(
+      final tUser = PatientModel(
         name: namecontroller.text.toString(),
         id: newUser.user!.uid,
         email: emailcontroller.text.toString(),
@@ -119,11 +119,11 @@ class _SignupState extends State<Signup> {
         password: passwordcontroller.text.toString(),
       );
       final pUser = UserModel(
-        name: namecontroller.text.toString(),
-        id: newUser.user!.uid,
-        email: emailcontroller.text.toString(),
-        role: userType,
-      );
+          name: namecontroller.text.toString(),
+          id: newUser.user!.uid,
+          email: emailcontroller.text.toString(),
+          role: userType,
+          created_at: "");
       await Services.firestore.collection("users").doc(newUser.user!.uid).set(
             pUser.toJson(),
           );
@@ -184,6 +184,12 @@ class _SignupState extends State<Signup> {
         });
         Dialogss().errorDialog(context, 'Error Occured',
             "Bad Connection. Please check your internet");
+      } else if (e.code == 'invalid-email') {
+        setState(() {
+          isLoading = false;
+        });
+        Dialogss().errorDialog(context, 'Error Occured',
+            "Your Email is badly formatted Please use anyother email.");
       } else {
         setState(() {
           isLoading = false;

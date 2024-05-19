@@ -226,7 +226,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "agree to our ",
+                          "agreed to our ",
                           style: TextStyle(fontSize: 15),
                         ),
                         Text(

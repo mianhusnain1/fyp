@@ -1,10 +1,11 @@
-import 'package:doctor/Screens/patient/home.dart';
 import 'package:doctor/main.dart';
-import 'package:doctor/widgets/dialogs.dart';
+import 'package:doctor/widgets/diaolog.dart';
 import 'package:flutter/material.dart';
 
-class Appointment extends StatelessWidget {
-  const Appointment({super.key});
+class PatientProfile extends StatelessWidget {
+  const PatientProfile({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class Appointment extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Dialogss().logOutDialog(context);
+          Dialogs().logOutDialog(context);
         },
         label: const Row(
           children: [
@@ -29,7 +30,7 @@ class Appointment extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavigation(),
+      // bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

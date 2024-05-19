@@ -23,7 +23,7 @@ class _AllCatagoryScreenState extends State<AllCatagoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("All Catagories"),
+        title: const Text("All Categories"),
         backgroundColor: darkColor,
       ),
       body: Padding(
