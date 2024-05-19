@@ -11,6 +11,7 @@ class DoctorModel {
   late String bio;
   late String image;
   late bool availability;
+  late bool approved;
   //
   DoctorModel({
     required this.catagory,
@@ -25,6 +26,7 @@ class DoctorModel {
     required this.schedule,
     required this.image,
     required this.availability,
+    required this.approved,
   });
 
   DoctorModel.fromJson(Map<String, dynamic> json) {
@@ -40,6 +42,7 @@ class DoctorModel {
     schedule = json["schedule"] ?? "";
     image = json["image"] ?? "";
     availability = json["availability"] ?? false;
+    availability = json["approved"] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +54,7 @@ class DoctorModel {
     data["catagory"] = catagory;
     data["lic"] = licence;
     data["bio"] = bio;
+    data["approved"] = approved;
     data["address"] = address;
     data["city"] = city;
     data["schedule"] = schedule;

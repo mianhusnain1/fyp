@@ -137,6 +137,7 @@ class _SignupState extends State<Signup> {
         city: '',
         schedule: '',
         availability: false,
+        approved: false,
         catagory: _selectedSpecialization!,
       );
       await Services.firestore
