@@ -97,7 +97,8 @@ class _SearchedCatagoryState extends State<SearchedCatagory> {
                                   [];
                               newList.clear();
                               for (var i in list) {
-                                if (i.catagory == widget.catagory) {
+                                if (i.catagory == widget.catagory &&
+                                    i.approved == true) {
                                   newList.add(i);
                                 }
                               }

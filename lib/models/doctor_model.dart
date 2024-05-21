@@ -16,6 +16,7 @@ class DoctorModel {
   late bool availability;
   late bool wrong_id_card;
   late bool wrong_licence;
+  late bool approved;
   //
   DoctorModel({
     required this.catagory,
@@ -33,6 +34,7 @@ class DoctorModel {
     required this.created_at,
     required this.wrong_id_card,
     required this.wrong_licence,
+    required this.approved,
   });
 
   DoctorModel.fromJson(Map<String, dynamic> json) {
@@ -51,6 +53,7 @@ class DoctorModel {
     created_at = json["created_at"] ?? "";
     wrong_id_card = json["wrong_id_card"] ?? false;
     wrong_licence = json["wrong_licence"] ?? false;
+    approved = json['approved'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +73,7 @@ class DoctorModel {
     data["created_at"] = created_at;
     data["wrong_id_card"] = wrong_id_card;
     data["wrong_licence"] = wrong_licence;
+    data["approved"] = approved;
     return data;
   }
 }

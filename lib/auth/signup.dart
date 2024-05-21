@@ -144,7 +144,7 @@ class _SignupState extends State<Signup> {
         catagory: _selectedSpecialization!,
         created_at: time,
         wrong_id_card: false,
-        wrong_licence: false,
+        wrong_licence: false, approved: false,
       );
       await Services.firestore
           .collection("doctor")

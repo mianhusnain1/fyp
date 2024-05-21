@@ -172,7 +172,7 @@ class Services {
     availability: false,
     city: '',
     wrong_licence: false,
-    wrong_id_card: false,
+    wrong_id_card: false, approved: false,
     // approved: false,
   );
   static Future<void> doctorProfile() async {
