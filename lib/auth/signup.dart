@@ -140,7 +140,7 @@ class _SignupState extends State<Signup> {
         city: '',
         schedule: '',
         availability: false,
-        approved: false,
+        // approved: false,
         catagory: _selectedSpecialization!,
         created_at: time,
         wrong_id_card: false,

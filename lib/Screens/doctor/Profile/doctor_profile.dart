@@ -23,26 +23,12 @@ class _ServiceProfileScreenState extends State<ServiceProfileScreen> {
         leading: const SizedBox(),
         backgroundColor: darkColor,
         title: const Text(
-          "Service Provider",
+          "Doctor Profile",
           style: TextStyle(
             color: Colors.white,
           ),
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: IconButton(
-              onPressed: () {
-                AuthDialogs().logOutDialog(context);
-              },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
       ),
       body: Center(
         child: Column(

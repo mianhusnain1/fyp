@@ -14,7 +14,6 @@ class DoctorModel {
   late String image;
   late String created_at;
   late bool availability;
-  late bool approved;
   late bool wrong_id_card;
   late bool wrong_licence;
   //
@@ -31,10 +30,9 @@ class DoctorModel {
     required this.schedule,
     required this.image,
     required this.availability,
-    required this.wrong_licence,
-    required this.wrong_id_card,
-    required this.approved,
     required this.created_at,
+    required this.wrong_id_card,
+    required this.wrong_licence,
   });
 
   DoctorModel.fromJson(Map<String, dynamic> json) {
@@ -49,11 +47,10 @@ class DoctorModel {
     city = json["city"] ?? "";
     schedule = json["schedule"] ?? "";
     image = json["image"] ?? "";
-    created_at = json["created_at"] ?? "";
     availability = json["availability"] ?? false;
-    wrong_licence = json["wrong_licence"] ?? false;
+    created_at = json["created_at"] ?? "";
     wrong_id_card = json["wrong_id_card"] ?? false;
-    approved = json["approved"] ?? false;
+    wrong_licence = json["wrong_licence"] ?? false;
   }
 
   Map<String, dynamic> toJson() {
@@ -65,7 +62,6 @@ class DoctorModel {
     data["catagory"] = catagory;
     data["lic"] = licence;
     data["bio"] = bio;
-    data["approved"] = approved;
     data["address"] = address;
     data["city"] = city;
     data["schedule"] = schedule;

@@ -173,7 +173,7 @@ class Services {
     city: '',
     wrong_licence: false,
     wrong_id_card: false,
-    approved: false,
+    // approved: false,
   );
   static Future<void> doctorProfile() async {
     await firestore.collection("doctor").doc(user.uid).get().then((user) async {
